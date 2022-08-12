@@ -1,7 +1,7 @@
 package br.com.challenge.apirest.alura.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -11,8 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "despesas")
@@ -31,9 +29,8 @@ public class Despesa implements Serializable {
 	@Column(nullable = false)
 	private Double valor;
 	
-	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	private Date data;
+	private LocalDate data;
 	
 	public Despesa() {}
 
@@ -61,11 +58,11 @@ public class Despesa implements Serializable {
 		this.valor = valor;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
