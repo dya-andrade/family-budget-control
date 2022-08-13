@@ -16,4 +16,10 @@ public interface ReceitaRepository extends JpaRepository<Receita, Integer> {
 
 	@Query("SELECT r FROM Receita r WHERE r.descricao LIKE LOWER(CONCAT ('%',:descricao,'%'))")
 	List<Receita> findByDescricao(String descricao); // LOWER - converte para minúsculo
+
+	@Query("SELECT r FROM Receita r WHERE YEAR(r.data) = :ano AND MONTH(r.data) = :mes")
+	List<Receita> findByMonth(Integer ano, Integer mes);
+
+	@Query("SELECT SUM(r.valor) FROM Receita r WHERE YEAR(r.data) = :ano AND MONTH(r.data) = :mes")
+	Double findTotalAmountByMonth(Integer ano, Integer mes);
 }

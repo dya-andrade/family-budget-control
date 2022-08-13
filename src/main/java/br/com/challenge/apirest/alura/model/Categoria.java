@@ -23,7 +23,7 @@ public enum Categoria {
 	OUTRAS("Outras");
 	
 	private String descricao;
-
+	
 	Categoria(String descricao) {
 		this.descricao = descricao;
 	}

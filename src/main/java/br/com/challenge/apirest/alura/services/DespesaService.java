@@ -104,4 +104,13 @@ public class DespesaService {
 
 		return vos;
 	}
+
+	public List<DespesaVO> findByMonth(Integer ano, Integer mes) {
+		
+		logger.info("Buscando despesas pelo mês/ano!");
+		
+		var vos = DozerMapper.parseListObjects(repository.findByMonth(ano, mes), DespesaVO.class);
+
+		return vos;
+	}
 }

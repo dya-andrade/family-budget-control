@@ -104,4 +104,13 @@ public class ReceitaService {
 
 		return vos;
 	}
+
+	public List<ReceitaVO> findByMonth(Integer ano, Integer mes) {
+		
+		logger.info("Buscando receitas pelo mês/ano!");
+		
+		var vos = DozerMapper.parseListObjects(repository.findByMonth(ano, mes), ReceitaVO.class);
+
+		return vos;
+	}
 }

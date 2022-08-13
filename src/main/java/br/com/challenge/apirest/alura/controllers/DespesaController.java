@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.challenge.apirest.alura.services.DespesaService;
@@ -30,8 +31,11 @@ public class DespesaController {
 	}
 
 	@GetMapping(produces = { MediaType.APPLICATION_JSON })
-	public List<DespesaVO> findAll() {
-		return service.findAll();
+	public List<DespesaVO> findAll(@RequestParam(value = "descricao", defaultValue = "") String descricao) {
+		if(descricao.isBlank()) 
+			return service.findAll();
+		else 
+			return service.findByDescricao(descricao);
 	}
 
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON })
@@ -50,8 +54,8 @@ public class DespesaController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping(value = "/{descricao}", produces = { MediaType.APPLICATION_JSON })
-	public List<DespesaVO> findByDescricao(@PathVariable(value = "descricao") String descricao) {
-		return service.findByDescricao(descricao);
+	@GetMapping(value = "/{ano}/{mes}", produces = { MediaType.APPLICATION_JSON })
+	public List<DespesaVO> findByMonth(@PathVariable(value = "ano") Integer ano, @PathVariable(value = "mes") Integer mes) {
+		return service.findByMonth(ano, mes);
 	}
 }
