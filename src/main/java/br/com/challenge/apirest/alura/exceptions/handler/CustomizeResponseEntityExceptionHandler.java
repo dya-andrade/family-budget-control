@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import br.com.challenge.apirest.alura.exceptions.AlreadyRegisteredException;
 import br.com.challenge.apirest.alura.exceptions.RequiredObjectIsNullException;
+import br.com.challenge.apirest.alura.exceptions.ResourceNotFoundException;
 import br.com.challenge.apirest.alura.exceptions.model.ExceptionResponse;
 
 @ControllerAdvice
@@ -37,5 +38,12 @@ public class CustomizeResponseEntityExceptionHandler extends ResponseEntityExcep
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
 				request.getDescription(false));
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.CONFLICT);
+	}
+	
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(Exception ex, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+				request.getDescription(false));
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 }

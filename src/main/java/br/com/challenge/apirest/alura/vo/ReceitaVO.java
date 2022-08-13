@@ -22,6 +22,8 @@ public class ReceitaVO implements Serializable {
 	@JsonProperty(required = true)
 	private Double valor;
 	
+	public ReceitaVO() {}
+	
 	@JsonCreator
 	public ReceitaVO(@JsonProperty(value = "descricao",required = true) String descricao, 
 			@JsonProperty(value = "data", required = true) LocalDate data, 
