@@ -77,7 +77,8 @@ A seguir os endpoint's:
 </br>
 
 - Listar despesas e receitas por descrição e mês
-<p>Passando `descricao` via requestParam e `mes and ano` via path</p>
+<p></p>
+Passando `descricao` via requestParam e `mes and ano` via path
 
 ```json
     {
@@ -103,7 +104,8 @@ A seguir os endpoint's:
 </br>
 
 - Resumo mensal das receitas e despesas
-<p>Passando `mes and ano` via path</p>
+<p></p>
+Passando `mes and ano` via path
 
 ```json
 {
