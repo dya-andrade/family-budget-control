@@ -14,44 +14,46 @@ A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do 
 * Flyway
 * Postman
 * JUnit 5 and Mockito
-</br>
 
 ## NOVIDADES
 Pretendo continuar evoluindo o projeto colocando Swagger, Teste de Integração e JWT.
-</br>
 
 ## ENDPOINT's
 
 A seguir os endpoint's:
 
+</br>
 - Criar receita ou despesa
+</br>
+
    ```json
-     {
+    {
     "descricao": "Salário",
     "data": "2022-08-12",
     "valor": "2660.00"
     }
    ```
 </br>
-
 - Atualizar receita ou despesa
 Passando `ID` via path 
+</br>
+
    ```json
-     {
+    {
     "descricao": "Salário",
     "data": "2022-08-12",
     "valor": "2660.00"
     }
    ```
 </br>
-
 - Deletar despesa ou receita
-Passando `ID` via path 
+Passando `ID` via path, não possui retorno.
 </br>
 
 - Listar todas as despesas e receitas
+</br>
+
    ```json
-[
     {
         "descricao": "Alimentação",
         "categoria": "Saúde",
@@ -70,12 +72,13 @@ Passando `ID` via path
         "data": "2022-08-13",
         "valor": 350.0
     }
-]
    ```
 </br>
 
 - Listar despesas e receitas por descrição e mês
 Passando `descricao` via requestParam e `mes and ano` via path
+</br>
+
    ```json
 [
     {
@@ -90,20 +93,22 @@ Passando `descricao` via requestParam e `mes and ano` via path
 
 - Buscar receitas e despesas pelo ID
 Passando `ID` via path 
+</br>
+
    ```json
-[
     {
         "descricao": "Alimentação",
         "categoria": "Saúde",
         "data": "2022-08-13",
         "valor": 200.0
     }
-]
    ```
 </br>
 
 - Resumo mensal das receitas e despesas
 Passando `mes and ano` via path
+</br>
+
    ```json
 {
     "valor_total_receitas": 2660.0,
