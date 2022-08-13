@@ -37,6 +37,8 @@ A seguir os endpoint's:
 </br>
 
 - Atualizar receita ou despesa
+</br>
+
 Passando `ID` via path 
 </br>
 
@@ -50,6 +52,8 @@ Passando `ID` via path
 </br>
 
 - Deletar despesa ou receita
+</br>
+
 Passando `ID` via path, não possui retorno.
 </br>
 
@@ -79,6 +83,8 @@ Passando `ID` via path, não possui retorno.
 </br>
 
 - Listar despesas e receitas por descrição e mês
+</br>
+
 Passando `descricao` via requestParam e `mes and ano` via path
 </br>
 
@@ -95,6 +101,8 @@ Passando `descricao` via requestParam e `mes and ano` via path
 </br>
 
 - Buscar receitas e despesas pelo ID
+</br>
+
 Passando `ID` via path 
 </br>
 
@@ -109,6 +117,8 @@ Passando `ID` via path
 </br>
 
 - Resumo mensal das receitas e despesas
+</br>
+
 Passando `mes and ano` via path
 </br>
 
