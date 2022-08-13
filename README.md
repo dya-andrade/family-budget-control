@@ -28,9 +28,9 @@ A seguir os endpoint's:
 
  ```json
     {
-     "descricao": "Salário",
-     "data": "2022-08-12",
-     "valor": "2660.00"
+      "descricao": "Salário",
+      "data": "2022-08-12",
+      "valor": "2660.00"
     }
  ```
 </br>
@@ -93,7 +93,7 @@ A seguir os endpoint's:
 <p>Passando `ID` via path</p>
 
 ```json
- {
+  {
      "descricao": "Alimentação",
      "categoria": "Saúde",
      "data": "2022-08-13",
