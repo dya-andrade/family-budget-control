@@ -36,7 +36,8 @@ A seguir os endpoint's:
 </br>
 
 - Atualizar receita ou despesa
-<p>Passando `ID` via path</p>
+<p></p>
+Passando `ID` via path
 
 ```json
     {
@@ -48,7 +49,8 @@ A seguir os endpoint's:
 </br>
 
 - Deletar despesa ou receita
-<p>Passando `ID` via path, não possui retorno.</p>
+<p></p>
+Passando `ID` via path, não possui retorno.
 
 </br>
 
@@ -91,7 +93,8 @@ Passando `descricao` via requestParam e `mes and ano` via path
 </br>
 
 - Buscar receitas e despesas pelo ID
-<p>Passando `ID` via path</p>
+<p></p>
+ Passando `ID` via path
 
 ```json
   {
