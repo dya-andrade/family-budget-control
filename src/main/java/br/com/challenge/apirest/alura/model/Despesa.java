@@ -32,6 +32,9 @@ public class Despesa implements Serializable {
 	@Column(nullable = false)
 	private LocalDate data;
 	
+	@Column(nullable = false)
+	private Categoria categoria;
+	
 	public Despesa() {}
 
 	public Integer getId() {
@@ -66,9 +69,17 @@ public class Despesa implements Serializable {
 		this.data = data;
 	}
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(data, descricao, id, valor);
+		return Objects.hash(categoria, data, descricao, id, valor);
 	}
 
 	@Override
@@ -80,7 +91,8 @@ public class Despesa implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Despesa other = (Despesa) obj;
-		return Objects.equals(data, other.data) && Objects.equals(descricao, other.descricao)
-				&& Objects.equals(id, other.id) && Objects.equals(valor, other.valor);
+		return categoria == other.categoria && Objects.equals(data, other.data)
+				&& Objects.equals(descricao, other.descricao) && Objects.equals(id, other.id)
+				&& Objects.equals(valor, other.valor);
 	}
 }

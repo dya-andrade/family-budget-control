@@ -13,35 +13,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.challenge.apirest.alura.services.ReceitaService;
+import br.com.challenge.apirest.alura.services.DespesaService;
 import br.com.challenge.apirest.alura.util.MediaType;
-import br.com.challenge.apirest.alura.vo.ReceitaVO;
+import br.com.challenge.apirest.alura.vo.DespesaVO;
 
 @RestController
-@RequestMapping("/budget-control/receitas")
-public class ReceitaController {
+@RequestMapping("/budget-control/despesas")
+public class DespesaController {
 
 	@Autowired
-	private ReceitaService service;
+	private DespesaService service;
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
-	public ReceitaVO create(@RequestBody ReceitaVO receitaVO) {
-		return service.create(receitaVO);
+	public DespesaVO create(@RequestBody DespesaVO despesaVO) {
+		return service.create(despesaVO);
 	}
 
 	@GetMapping(produces = { MediaType.APPLICATION_JSON })
-	public List<ReceitaVO> findAll() {
+	public List<DespesaVO> findAll() {
 		return service.findAll();
 	}
 
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON })
-	public ReceitaVO findById(@PathVariable(value = "id") Integer id) {
+	public DespesaVO findById(@PathVariable(value = "id") Integer id) {
 		return service.findById(id);
 	}
 
 	@PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
-	public ReceitaVO update(@PathVariable(value = "id") Integer id, @RequestBody ReceitaVO receitaVO) {
-		return service.update(id, receitaVO);
+	public DespesaVO update(@PathVariable(value = "id") Integer id, @RequestBody DespesaVO despesaVO) {
+		return service.update(id, despesaVO);
 	}
 
 	@DeleteMapping(value = "/{id}")
@@ -51,7 +51,7 @@ public class ReceitaController {
 	}
 	
 	@GetMapping(value = "/{descricao}", produces = { MediaType.APPLICATION_JSON })
-	public List<ReceitaVO> findByDescricao(@PathVariable(value = "descricao") String descricao) {
+	public List<DespesaVO> findByDescricao(@PathVariable(value = "descricao") String descricao) {
 		return service.findByDescricao(descricao);
 	}
 }

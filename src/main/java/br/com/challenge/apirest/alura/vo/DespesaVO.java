@@ -8,8 +8,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "descricao", "data", "valor" })
-public class ReceitaVO implements Serializable {
+import br.com.challenge.apirest.alura.model.Categoria;
+
+@JsonPropertyOrder({ "descricao", "categoria", "data", "valor" })
+public class DespesaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,18 +20,26 @@ public class ReceitaVO implements Serializable {
 	private LocalDate data;
 
 	private Double valor;
+	
+	private Categoria categoria;
 
-	public ReceitaVO() {
+	public DespesaVO() {
 	}
 
 	@JsonCreator
-	public ReceitaVO(@JsonProperty(value = "descricao", required = true) String descricao,
+	public DespesaVO(@JsonProperty(value = "descricao", required = true) String descricao,
 			@JsonProperty(value = "data", required = true) LocalDate data,
-			@JsonProperty(value = "valor", required = true) Double valor) {
+			@JsonProperty(value = "valor", required = true) Double valor,
+			@JsonProperty(value = "categoria", required = false) Categoria categoria) {
 
 		this.descricao = descricao;
 		this.data = data;
 		this.valor = valor;
+		
+		if(categoria == null)
+			this.categoria = Categoria.OUTRAS;
+		else 
+			this.categoria = categoria;		
 	}
 
 	public String getDescricao() {
@@ -56,9 +66,17 @@ public class ReceitaVO implements Serializable {
 		this.valor = valor;
 	}
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(data, descricao, valor);
+		return Objects.hash(categoria, data, descricao, valor);
 	}
 
 	@Override
@@ -69,8 +87,8 @@ public class ReceitaVO implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ReceitaVO other = (ReceitaVO) obj;
-		return Objects.equals(data, other.data) && Objects.equals(descricao, other.descricao)
-				&& Objects.equals(valor, other.valor);
+		DespesaVO other = (DespesaVO) obj;
+		return categoria == other.categoria && Objects.equals(data, other.data)
+				&& Objects.equals(descricao, other.descricao) && Objects.equals(valor, other.valor);
 	}
 }

@@ -96,4 +96,12 @@ public class ReceitaService {
 		logger.info("Receita deletada!");
 	}
 
+	public List<ReceitaVO> findByDescricao(String descricao) {
+		
+		logger.info("Buscando receitas pela descrição!");
+				
+		var vos = DozerMapper.parseListObjects(repository.findByDescricao(descricao), ReceitaVO.class);
+
+		return vos;
+	}
 }
