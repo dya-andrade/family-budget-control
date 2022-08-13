@@ -34,11 +34,10 @@ A seguir os endpoint's:
     "valor": "2660.00"
     }
    ```
-</br>
+</hr>
 
 - Atualizar receita ou despesa
 </br>
-
 Passando `ID` via path 
 </br>
 
@@ -49,13 +48,14 @@ Passando `ID` via path
     "valor": "2660.00"
     }
    ```
-</br>
+</hr>
 
 - Deletar despesa ou receita
 </br>
-
 Passando `ID` via path, não possui retorno.
 </br>
+
+</hr>
 
 - Listar todas as despesas e receitas
 </br>
@@ -80,11 +80,10 @@ Passando `ID` via path, não possui retorno.
         "valor": 350.0
     }
    ```
-</br>
+</hr>
 
 - Listar despesas e receitas por descrição e mês
 </br>
-
 Passando `descricao` via requestParam e `mes and ano` via path
 </br>
 
@@ -98,11 +97,10 @@ Passando `descricao` via requestParam e `mes and ano` via path
     }
 ]
    ```
-</br>
+</hr>
 
 - Buscar receitas e despesas pelo ID
 </br>
-
 Passando `ID` via path 
 </br>
 
@@ -114,11 +112,10 @@ Passando `ID` via path
         "valor": 200.0
     }
    ```
-</br>
+</hr>
 
 - Resumo mensal das receitas e despesas
 </br>
-
 Passando `mes and ano` via path
 </br>
 
