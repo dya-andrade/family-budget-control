@@ -25,7 +25,6 @@ A seguir os endpoint's:
 </br>
 
 - Criar receita ou despesa
-</br>
 
    ```json
     {
@@ -34,12 +33,10 @@ A seguir os endpoint's:
     "valor": "2660.00"
     }
    ```
-</hr>
+</br>
 
 - Atualizar receita ou despesa
-</br>
-Passando `ID` via path 
-</br>
+<p>Passando `ID` via path</p>
 
    ```json
     {
@@ -48,17 +45,14 @@ Passando `ID` via path
     "valor": "2660.00"
     }
    ```
-</hr>
+</br>
 
 - Deletar despesa ou receita
-</br>
-Passando `ID` via path, não possui retorno.
-</br>
+<p>Passando `ID` via path, não possui retorno.</p>
 
-</hr>
+</br>
 
 - Listar todas as despesas e receitas
-</br>
 
    ```json
     {
@@ -80,12 +74,10 @@ Passando `ID` via path, não possui retorno.
         "valor": 350.0
     }
    ```
-</hr>
+</br>
 
 - Listar despesas e receitas por descrição e mês
-</br>
-Passando `descricao` via requestParam e `mes and ano` via path
-</br>
+<p>Passando `descricao` via requestParam e `mes and ano` via path</p>
 
    ```json
 [
@@ -97,12 +89,10 @@ Passando `descricao` via requestParam e `mes and ano` via path
     }
 ]
    ```
-</hr>
+</br>
 
 - Buscar receitas e despesas pelo ID
-</br>
-Passando `ID` via path 
-</br>
+<p>Passando `ID` via path</p>
 
    ```json
     {
@@ -112,12 +102,10 @@ Passando `ID` via path
         "valor": 200.0
     }
    ```
-</hr>
+</br>
 
 - Resumo mensal das receitas e despesas
-</br>
-Passando `mes and ano` via path
-</br>
+<p>Passando `mes and ano` via path</p>
 
    ```json
 {
