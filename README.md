@@ -26,25 +26,25 @@ A seguir os endpoint's:
 
 - Criar receita ou despesa
 
-   ```json
+ ```json
     {
-    "descricao": "Salário",
-    "data": "2022-08-12",
-    "valor": "2660.00"
+     "descricao": "Salário",
+     "data": "2022-08-12",
+     "valor": "2660.00"
     }
-   ```
+ ```
 </br>
 
 - Atualizar receita ou despesa
 <p>Passando `ID` via path</p>
 
-   ```json
+```json
     {
-    "descricao": "Salário",
-    "data": "2022-08-12",
-    "valor": "2660.00"
+      "descricao": "Salário",
+      "data": "2022-08-12",
+      "valor": "2660.00"
     }
-   ```
+```
 </br>
 
 - Deletar despesa ou receita
@@ -54,7 +54,7 @@ A seguir os endpoint's:
 
 - Listar todas as despesas e receitas
 
-   ```json
+```json
     {
         "descricao": "Alimentação",
         "categoria": "Saúde",
@@ -73,41 +73,39 @@ A seguir os endpoint's:
         "data": "2022-08-13",
         "valor": 350.0
     }
-   ```
+ ```
 </br>
 
 - Listar despesas e receitas por descrição e mês
 <p>Passando `descricao` via requestParam e `mes and ano` via path</p>
 
-   ```json
-[
+```json
     {
-        "descricao": "Alimentação",
-        "categoria": "Saúde",
-        "data": "2022-08-13",
-        "valor": 200.0
+       "descricao": "Alimentação",
+       "categoria": "Saúde",
+       "data": "2022-08-13",
+       "valor": 200.0
     }
-]
-   ```
+```
 </br>
 
 - Buscar receitas e despesas pelo ID
 <p>Passando `ID` via path</p>
 
-   ```json
-    {
-        "descricao": "Alimentação",
-        "categoria": "Saúde",
-        "data": "2022-08-13",
-        "valor": 200.0
-    }
-   ```
+```json
+ {
+     "descricao": "Alimentação",
+     "categoria": "Saúde",
+     "data": "2022-08-13",
+     "valor": 200.0
+   }
+```
 </br>
 
 - Resumo mensal das receitas e despesas
 <p>Passando `mes and ano` via path</p>
 
-   ```json
+```json
 {
     "valor_total_receitas": 2660.0,
     "valor_total_despesas": 800.0,
@@ -123,5 +121,5 @@ A seguir os endpoint's:
         }
     ]
 }
-   ```
+```
 </br>
