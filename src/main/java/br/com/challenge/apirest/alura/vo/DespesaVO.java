@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -15,6 +16,9 @@ public class DespesaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonIgnore
+	private Integer key;
+	
 	private String descricao;
 
 	private LocalDate data;
@@ -40,6 +44,14 @@ public class DespesaVO implements Serializable {
 			this.categoria = Categoria.OUTRAS;
 		else 
 			this.categoria = categoria;		
+	}
+
+	public Integer getKey() {
+		return key;
+	}
+
+	public void setKey(Integer key) {
+		this.key = key;
 	}
 
 	public String getDescricao() {
