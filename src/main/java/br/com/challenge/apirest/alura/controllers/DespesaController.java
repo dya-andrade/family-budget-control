@@ -27,7 +27,7 @@ public class DespesaController {
 	@Autowired
 	private DespesaService service;
 
-	@CacheEvict(value = {"listaDespesasMes", "resumoMes"}, allEntries = true)
+	@CacheEvict(value = {"listaDespesas", "listaDespesasMes", "resumoMes"}, allEntries = true)
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
 	public DespesaVO create(@RequestBody DespesaVO despesaVO) {
 		return service.create(despesaVO);
@@ -47,13 +47,13 @@ public class DespesaController {
 		return service.findById(id);
 	}
 
-	@CacheEvict(value = {"listaDespesasMes", "resumoMes"}, allEntries = true)
+	@CacheEvict(value = {"listaDespesas", "listaDespesasMes", "resumoMes"}, allEntries = true)
 	@PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
 	public DespesaVO update(@PathVariable(value = "id") Integer id, @RequestBody DespesaVO despesaVO) {
 		return service.update(id, despesaVO);
 	}
 
-	@CacheEvict(value = {"listaDespesasMes", "resumoMes"}, allEntries = true)
+	@CacheEvict(value = {"listaDespesas", "listaDespesasMes", "resumoMes"}, allEntries = true)
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
 		service.delete(id);

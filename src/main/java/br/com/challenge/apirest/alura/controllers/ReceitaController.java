@@ -27,7 +27,7 @@ public class ReceitaController {
 	@Autowired
 	private ReceitaService service;
 
-	@CacheEvict(value = {"listaReceitasMes", "resumoMes"}, allEntries = true)
+	@CacheEvict(value = {"listaReceitas", "listaReceitasMes", "resumoMes"}, allEntries = true)
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
 	public ReceitaVO create(@RequestBody ReceitaVO receitaVO) {
 		return service.create(receitaVO);
@@ -47,13 +47,13 @@ public class ReceitaController {
 		return service.findById(id);
 	}
 
-	@CacheEvict(value = {"listaReceitasMes", "resumoMes"}, allEntries = true)
+	@CacheEvict(value = {"listaReceitas", "listaReceitasMes", "resumoMes"}, allEntries = true)
 	@PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
 	public ReceitaVO update(@PathVariable(value = "id") Integer id, @RequestBody ReceitaVO receitaVO) {
 		return service.update(id, receitaVO);
 	}
 
-	@CacheEvict(value = {"listaReceitasMes", "resumoMes"}, allEntries = true)
+	@CacheEvict(value = {"listaReceitas", "listaReceitasMes", "resumoMes"}, allEntries = true)
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
 		service.delete(id);
