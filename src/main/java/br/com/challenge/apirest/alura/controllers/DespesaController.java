@@ -3,6 +3,8 @@ package br.com.challenge.apirest.alura.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +27,13 @@ public class DespesaController {
 	@Autowired
 	private DespesaService service;
 
+	@CacheEvict(value = {"listaDespesasMes", "resumoMes"}, allEntries = true)
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
 	public DespesaVO create(@RequestBody DespesaVO despesaVO) {
 		return service.create(despesaVO);
 	}
 
+	@Cacheable(value = "listaDespesas")
 	@GetMapping(produces = { MediaType.APPLICATION_JSON })
 	public List<DespesaVO> findAll(@RequestParam(value = "descricao", defaultValue = "") String descricao) {
 		if(descricao.isBlank()) 
@@ -37,23 +41,26 @@ public class DespesaController {
 		else 
 			return service.findByDescricao(descricao);
 	}
-
+	
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON })
 	public DespesaVO findById(@PathVariable(value = "id") Integer id) {
 		return service.findById(id);
 	}
 
+	@CacheEvict(value = {"listaDespesasMes", "resumoMes"}, allEntries = true)
 	@PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
 	public DespesaVO update(@PathVariable(value = "id") Integer id, @RequestBody DespesaVO despesaVO) {
 		return service.update(id, despesaVO);
 	}
 
+	@CacheEvict(value = {"listaDespesasMes", "resumoMes"}, allEntries = true)
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
+
+	@Cacheable(value = "listaDespesasMes")
 	@GetMapping(value = "/{ano}/{mes}", produces = { MediaType.APPLICATION_JSON })
 	public List<DespesaVO> findByMonth(@PathVariable(value = "ano") Integer ano, @PathVariable(value = "mes") Integer mes) {
 		return service.findByMonth(ano, mes);

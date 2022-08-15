@@ -7,12 +7,12 @@ import java.util.List;
 import br.com.challenge.apirest.alura.model.Receita;
 import br.com.challenge.apirest.alura.vo.ReceitaVO;
 
-public class MockReceita {
+public class ReceitaMock {
 
 	private Receita receita;
 
 	private ReceitaVO receitaVO;
-
+	
 	public Receita mockEntity() {
 		return mockEntity(0);
 	}
@@ -26,7 +26,7 @@ public class MockReceita {
 
 		receita.setId(number);
 		receita.setDescricao("Descricao Test " + number);
-		receita.setData(LocalDate.of(number, number, number));
+		receita.setData(LocalDate.of(2000 + number, number, number));
 		receita.setValor(0.0 + number);
 
 		return receita;
@@ -35,9 +35,8 @@ public class MockReceita {
 	public ReceitaVO mockVO(Integer number) {
 		receitaVO = new ReceitaVO();
 		
-		receitaVO.setKey(number);
 		receitaVO.setDescricao("Descricao Test " + number);
-		receitaVO.setData(LocalDate.of(number, number, number));
+		receitaVO.setData(LocalDate.of(2000 + number, number, number));
 		receitaVO.setValor(0.0 + number);
 
 		return receitaVO;
@@ -63,5 +62,4 @@ public class MockReceita {
 		
 		return vos;
 	}
-
 }
