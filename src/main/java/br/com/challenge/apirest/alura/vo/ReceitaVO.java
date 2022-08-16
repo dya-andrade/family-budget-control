@@ -10,19 +10,20 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 @JsonPropertyOrder({ "descricao", "data", "valor" })
 public class ReceitaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-    @NotNull @NotEmpty
+    @NotNull @NotEmpty(message = "A descrição não pode ser vazia.")
 	private String descricao;
 
-    @NotNull @NotEmpty
+    @NotNull @PastOrPresent(message = "Somente data no passado ou presente.")
 	private LocalDate data;
 
-    @NotNull @NotEmpty
+    @NotNull
 	private Double valor;
 
 	public ReceitaVO() {

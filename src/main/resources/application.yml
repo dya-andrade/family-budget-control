@@ -1,3 +1,5 @@
+cors:
+  originPatterns: http://localhost:8080,https://familybudgetcontrol.com.br
 file:
   upload-dir: /files/upload-dir #diretório para salvar os arquivos 
 spring:
@@ -12,7 +14,7 @@ spring:
     properties:
       hibernate:
       dialect: org.hibernate.dialect.MySQL8Dialect
-    show-sql: false
+    show-sql: true
 management:
   endpoints:
     web:
@@ -21,5 +23,8 @@ management:
   endpoint:
     health:
       show-details: always
-
-   
+springdoc:
+  pathsToMatch: #para restrigir as descrições
+  - /budget-control/**
+  swagger-ui:
+    use-root-path: true #acessível diretamente do caminho raiz 
