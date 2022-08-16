@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.challenge.apirest.alura.services.ReceitaService;
 import br.com.challenge.apirest.alura.util.MediaType;
 import br.com.challenge.apirest.alura.vo.ReceitaVO;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/budget-control/receitas")
@@ -29,7 +30,7 @@ public class ReceitaController {
 
 	@CacheEvict(value = {"listaReceitas", "listaReceitasMes", "resumoMes"}, allEntries = true)
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
-	public ReceitaVO create(@RequestBody ReceitaVO receitaVO) {
+	public ReceitaVO create(@RequestBody @Valid ReceitaVO receitaVO) {
 		return service.create(receitaVO);
 	}
 
@@ -49,7 +50,7 @@ public class ReceitaController {
 
 	@CacheEvict(value = {"listaReceitas", "listaReceitasMes", "resumoMes"}, allEntries = true)
 	@PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
-	public ReceitaVO update(@PathVariable(value = "id") Integer id, @RequestBody ReceitaVO receitaVO) {
+	public ReceitaVO update(@PathVariable(value = "id") Integer id, @RequestBody @Valid ReceitaVO receitaVO) {
 		return service.update(id, receitaVO);
 	}
 

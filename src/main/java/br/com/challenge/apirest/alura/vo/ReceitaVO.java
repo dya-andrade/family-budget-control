@@ -8,15 +8,21 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 @JsonPropertyOrder({ "descricao", "data", "valor" })
 public class ReceitaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+    @NotNull @NotEmpty
 	private String descricao;
 
+    @NotNull @NotEmpty
 	private LocalDate data;
 
+    @NotNull @NotEmpty
 	private Double valor;
 
 	public ReceitaVO() {

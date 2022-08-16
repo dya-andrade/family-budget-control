@@ -11,9 +11,13 @@ import br.com.challenge.apirest.alura.vo.ReceitaVO;
 
 public class ReceitaAssert {
 	
-	private static int number;
+	private int number;
 	
-	public static void assertVO(ReceitaVO vo) {
+	public ReceitaAssert(int number) {
+		this.number = number;
+	}
+
+	public final void assertVO(ReceitaVO vo) {
 		assertNotNull(vo);
 		assertNotNull(vo.getDescricao());
 		assertNotNull(vo.getData());
@@ -24,7 +28,7 @@ public class ReceitaAssert {
 		assertEquals(0.0 + number, vo.getValor());
 	}
 	
-	public static void assertEntity(Receita entity) {
+	public final void assertEntity(Receita entity) {
 		assertNotNull(entity);
 		assertNotNull(entity.getId());
 		assertNotNull(entity.getDescricao());
@@ -38,11 +42,7 @@ public class ReceitaAssert {
 		assertEquals(0.0 + number, entity.getValor());
 	}
 
-	public static int getNumber() {
+	public int getNumber() {
 		return number;
-	}
-
-	public static void setNumber(int number) {
-		ReceitaAssert.number = number;
 	}
 }

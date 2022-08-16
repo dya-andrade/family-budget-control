@@ -32,6 +32,8 @@ public class ReceitaControllerTest {
 	private ReceitaMock receitaMock;
 	
 	private ReceitaVO receitaVO;
+	
+	private ReceitaAssert receitaAssert;
 		
 	@Autowired
 	private MockMvc mockMvc;
@@ -41,9 +43,9 @@ public class ReceitaControllerTest {
 	
 	@BeforeEach //executado antes de cada método 
 	void setUpMocks() throws Exception {
-		ReceitaAssert.setNumber(4);
+		receitaAssert = new ReceitaAssert(1);
 		receitaMock = new ReceitaMock();
-		receitaVO = receitaMock.mockVO(4);
+		receitaVO = receitaMock.mockVO(receitaAssert.getNumber());
 		
 		objectMapper = new ObjectMapper();
 		objectMapper.registerModule(new JavaTimeModule());
@@ -72,6 +74,6 @@ public class ReceitaControllerTest {
 		
 		ReceitaVO receitaVO = objectMapper.readValue(content, ReceitaVO.class);
 		
-		ReceitaAssert.assertVO(receitaVO);
+		receitaAssert.assertVO(receitaVO);
 	}
 }

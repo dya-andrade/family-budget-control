@@ -12,9 +12,13 @@ import br.com.challenge.apirest.alura.vo.DespesaVO;
 
 public class DespesaAssert {
 	
-	private static int number;
+	private int number;
 	
-	public static void assertVO(DespesaVO vo) {
+	public DespesaAssert(int number) {
+		this.number = number;
+	}
+
+	public final void assertVO(DespesaVO vo) {
 		assertNotNull(vo);
 		assertNotNull(vo.getDescricao());
 		assertNotNull(vo.getData());
@@ -27,7 +31,7 @@ public class DespesaAssert {
 		assertEquals(Categoria.categoriaPorOrdinal(number), vo.getCategoria());
 	}
 	
-	public static void assertEntity(Despesa entity) {
+	public final void assertEntity(Despesa entity) {
 		assertNotNull(entity);
 		assertNotNull(entity.getId());
 		assertNotNull(entity.getDescricao());
@@ -42,12 +46,8 @@ public class DespesaAssert {
 		assertEquals(0.0 + number, entity.getValor());
 		assertEquals(Categoria.categoriaPorOrdinal(number), entity.getCategoria());
 	}
-	
-	public static int getNumber() {
-		return number;
-	}
 
-	public static void setNumber(int number) {
-		DespesaAssert.number = number;
+	public int getNumber() {
+		return number;
 	}
 }

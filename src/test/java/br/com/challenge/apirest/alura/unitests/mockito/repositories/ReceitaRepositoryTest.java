@@ -30,14 +30,16 @@ public class ReceitaRepositoryTest {
 	
 	private Receita entity;
 		
+	private ReceitaAssert receitaAssert;
+	
 	@Mock
 	private ReceitaRepository repository;
 	
 	@BeforeEach //executado antes de cada método 
 	void setUpMocks() throws Exception {
-		ReceitaAssert.setNumber(1);
+		receitaAssert = new ReceitaAssert(1);
 		receitaMock = new ReceitaMock();
-		entity = receitaMock.mockEntity(1);
+		entity = receitaMock.mockEntity(receitaAssert.getNumber());
 		
 		MockitoAnnotations.openMocks(this); // inicializa campos anotados com anotações Mockito
 	}
@@ -52,6 +54,6 @@ public class ReceitaRepositoryTest {
 		when(repository.findByDescricaoAndMes
 				(descricao, mes)).thenReturn(entity);
 		
-		ReceitaAssert.assertEntity(entity);
+		receitaAssert.assertEntity(entity);
 	}
 }

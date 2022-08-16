@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({ "totalReceitas", "totalDespesas", "saldoFinal", "totalPorCategoria" })
-public class ResumoVO implements Serializable {
+public class ResumoVO extends RepresentationModel<ResumoVO> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

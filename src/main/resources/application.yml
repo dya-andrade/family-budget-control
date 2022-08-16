@@ -1,3 +1,5 @@
+file:
+  upload-dir: /files/upload-dir #diretório para salvar os arquivos 
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -11,3 +13,13 @@ spring:
       hibernate:
       dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #inclui todos endpoints e habilitar detalhes do health
+  endpoint:
+    health:
+      show-details: always
+
+   

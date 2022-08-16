@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.challenge.apirest.alura.services.DespesaService;
 import br.com.challenge.apirest.alura.util.MediaType;
 import br.com.challenge.apirest.alura.vo.DespesaVO;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/budget-control/despesas")
@@ -29,7 +30,7 @@ public class DespesaController {
 
 	@CacheEvict(value = {"listaDespesas", "listaDespesasMes", "resumoMes"}, allEntries = true)
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
-	public DespesaVO create(@RequestBody DespesaVO despesaVO) {
+	public DespesaVO create(@RequestBody @Valid DespesaVO despesaVO) {
 		return service.create(despesaVO);
 	}
 
@@ -49,7 +50,7 @@ public class DespesaController {
 
 	@CacheEvict(value = {"listaDespesas", "listaDespesasMes", "resumoMes"}, allEntries = true)
 	@PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON }, produces = { MediaType.APPLICATION_JSON })
-	public DespesaVO update(@PathVariable(value = "id") Integer id, @RequestBody DespesaVO despesaVO) {
+	public DespesaVO update(@PathVariable(value = "id") Integer id, @RequestBody @Valid DespesaVO despesaVO) {
 		return service.update(id, despesaVO);
 	}
 
