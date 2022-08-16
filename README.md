@@ -139,6 +139,6 @@ Passando `mes and ano` via path
 - Resumo mensal das receitas e despesas em XLSX
 <p></p>
 Passando `mes and ano` via path, é gerado um XLSX.
-
 </br>
-![image](https://user-images.githubusercontent.com/101612046/184937533-a1a6752d-91fa-404d-aabd-dbc6aca32ddb.png)
+
+![image](https://user-images.githubusercontent.com/101612046/184937592-39e0f087-27c6-45ac-8eec-28a85765a261.png)
