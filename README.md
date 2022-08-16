@@ -140,4 +140,5 @@ Passando `mes and ano` via path
 <p></p>
 Passando `mes and ano` via path, é gerado um XLSX.
 
-![image](https://user-images.githubusercontent.com/101612046/184937299-fc93d4b9-f1fd-4438-abcf-23379ac6404a.png)
+</br>
+![image](https://user-images.githubusercontent.com/101612046/184937533-a1a6752d-91fa-404d-aabd-dbc6aca32ddb.png)
