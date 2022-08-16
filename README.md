@@ -10,11 +10,11 @@ A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do 
 ## DESENVOLVIMENTO
 
 * <b>Spring Boot</b> (JPA, Test, Validation, Actuator, Cache e Hateoas)
-* DozerMapper para conversão de VO para Entity
-* MySQL e Flyway para banco de dados
-* Postman para teste dos endpoints
-* JUnit 5, MockMVC e Mockito para testes unitários
-* Apache POI para geração de XLSX
+* <b>DozerMapper</b> para conversão de VO para Entity
+* <b>MySQL</b> e <b>Flyway</b> para banco de dados
+* <b>Postman</b> para teste dos endpoints
+* <b>JUnit 5</b>, <b>MockMVC<b/> e <b>Mockito</b> para testes unitários
+* <b>Apache POI</b> para geração de XLSX
 
 ## NOVIDADES
 Pretendo continuar evoluindo o projeto colocando Swagger, Teste de Integração e JWT (Security, Roles e Profile).
