@@ -9,7 +9,7 @@ A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do 
 
 ## DESENVOLVIMENTO
 
-* Spring Boot (JPA, Test, Validation, Actuator, Cache e Hateoas)
+* <b>Spring Boot</b> (JPA, Test, Validation, Actuator, Cache e Hateoas)
 * DozerMapper para conversão de VO para Entity
 * MySQL e Flyway para banco de dados
 * Postman para teste dos endpoints
