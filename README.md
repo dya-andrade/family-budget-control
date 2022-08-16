@@ -141,3 +141,12 @@ Passando `mes and ano` via path
 Passando `mes and ano` via path, é gerado um XLSX.
 
 ![image](https://user-images.githubusercontent.com/101612046/184937592-39e0f087-27c6-45ac-8eec-28a85765a261.png)
+
+</br>
+</hr>
+
+## SWAGGER
+
+![image](https://user-images.githubusercontent.com/101612046/184960182-791c2ef0-a004-4a07-ad47-ac57be4647a9.png)
+![image](https://user-images.githubusercontent.com/101612046/184960428-8f77c548-3469-4c5f-8c1c-f6f2b2c65437.png)
+
