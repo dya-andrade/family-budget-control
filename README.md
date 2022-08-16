@@ -2,13 +2,14 @@
 Challenge Back-end do Alura, sobre API REST de Controle de Orçamento Familiar.
 A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do mês, bem como gerar um relatório mensal.
 
-![image](https://user-images.githubusercontent.com/101612046/184511808-8b5c0290-5f8e-4ddf-89bf-564dca910a63.png)
+![image](https://user-images.githubusercontent.com/101612046/184932167-c1ff7262-ea5d-4bfa-9ab6-053fa4c55f73.png)
+
 
 </hr>
 
 ## DESENVOLVIMENTO
 
-* Spring Boot
+* Spring Boot (Validation, Actuator, Cache e Hateoas)
 * DozerMapper
 * MySQL
 * Flyway
@@ -16,7 +17,7 @@ A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do 
 * JUnit 5 and Mockito
 
 ## NOVIDADES
-Pretendo continuar evoluindo o projeto colocando Swagger, Teste de Integração e JWT.
+Pretendo continuar evoluindo o projeto colocando Swagger, Teste de Integração e JWT (Security e Profile).
 
 ## ENDPOINT's
 
@@ -125,7 +126,16 @@ Passando `mes and ano` via path
             "categoria": "Outras",
             "total": 600.0
         }
-    ]
+    ],
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/budget-control/resumo/downloadCsv/2022/8"
+        }
+    }
 }
 ```
 </br>
+
+- Resumo mensal das receitas e despesas em XLSX
+<p></p>
+Passando `mes and ano` via path, é gerado um XLSX.
