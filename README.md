@@ -10,14 +10,13 @@ A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do 
 ## DESENVOLVIMENTO
 
 * Spring Boot (Validation, Actuator, Cache e Hateoas)
-* DozerMapper
-* MySQL
-* Flyway
-* Postman
-* JUnit 5 and Mockito
+* DozerMapper para conversão de VO para Entity
+* MySQL e Flyway para banco de dados
+* Postman para teste dos endpoints
+* JUnit 5, MockMVC e Mockito para testes unitários
 
 ## NOVIDADES
-Pretendo continuar evoluindo o projeto colocando Swagger, Teste de Integração e JWT (Security e Profile).
+Pretendo continuar evoluindo o projeto colocando Swagger, Teste de Integração e JWT (Security, Roles e Profile).
 
 ## ENDPOINT's
 
