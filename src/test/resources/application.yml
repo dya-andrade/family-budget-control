@@ -1,0 +1,30 @@
+server:
+  port: 8888
+cors:
+  originPatterns: http://localhost:8080,https://familybudgetcontrol.com.br
+file:
+  upload-dir: /files/upload-dir #diretório para salvar os arquivos 
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+#db gerado dinamicamente runtime
+  jpa:
+    hibernate.ddl-auto: none
+    generate-ddl: true
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #inclui todos endpoints e habilitar detalhes do health
+  endpoint:
+    health:
+      show-details: always
+springdoc:
+  pathsToMatch: #para restrigir as descrições
+  - /budget-control/**
+  swagger-ui:
+    use-root-path: true #acessível diretamente do caminho raiz 

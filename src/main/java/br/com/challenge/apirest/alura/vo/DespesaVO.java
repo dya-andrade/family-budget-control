@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -14,16 +15,20 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 
 @JsonPropertyOrder({ "descricao", "categoria", "data", "valor" })
+@JsonFormat(locale = "pt_br", timezone = "UTC") 
 public class DespesaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-    @NotNull @NotEmpty(message = "A descrição não pode ser vazia.")
+	@NotNull
+    @NotEmpty()
 	private String descricao;
 
-    @NotNull @PastOrPresent(message = "Somente data no passado ou presente.")
+	@NotNull
+    @PastOrPresent()
+    @JsonFormat(pattern = "dd-MM-yyyy") 
 	private LocalDate data;
-
+    
     @NotNull
 	private Double valor;
 	

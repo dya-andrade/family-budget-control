@@ -16,6 +16,7 @@
 		<java.version>17</java.version>
 		<dozer.version>6.4.0</dozer.version>
 		<springdoc.version>2.0.0-M3</springdoc.version>
+		<testcontainers.version>1.16.3</testcontainers.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -88,8 +89,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>mysql</artifactId>
+			<version>${testcontainers.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
 			<scope>test</scope>
 		</dependency>
 

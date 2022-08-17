@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CacheService {
 	
-	private static String[] RECEITA = { "listaDespesas", "listaDespesasMes", "resumoMes", "resumoMesExcel" };
+	private static String[] DESPESAS = { "listaDespesas", "listaDespesasMes", "resumoMes", "resumoMesExcel" };
 
-	private static String[] DESPESA = { "listaReceitas", "listaReceitasMes", "resumoMes", "resumoMesExcel" };
+	private static String[] RECEITAS = { "listaReceitas", "listaReceitasMes", "resumoMes", "resumoMesExcel" };
 	
 	@Autowired
 	private CacheManager cacheManager;
@@ -25,13 +25,13 @@ public class CacheService {
 	}
 
 	public void clearAllCachesReceita() {
-		for (String cacheName : RECEITA) {
+		for (String cacheName : RECEITAS) {
 			evictAllCacheValues(cacheName);
 		}
 	}
 	
 	public void clearAllCachesDespesa() {
-		for (String cacheName : DESPESA) {
+		for (String cacheName : DESPESAS) {
 			evictAllCacheValues(cacheName);
 		}
 	}

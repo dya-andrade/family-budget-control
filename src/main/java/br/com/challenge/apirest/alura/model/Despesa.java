@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +33,7 @@ public class Despesa implements Serializable {
 	private Double valor;
 	
 	@Column(nullable = false)
+	@DateTimeFormat(iso = ISO.DATE, pattern = "dd-MM-yyyy")
 	private LocalDate data;
 	
 	@Column(nullable = false)

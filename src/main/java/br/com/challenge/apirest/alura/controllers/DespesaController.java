@@ -53,7 +53,7 @@ public class DespesaController {
 		return service.create(despesaVO);
 	}
 
-	@Cacheable()
+	@Cacheable(value = "listaDespesas")
 	@GetMapping(produces = { MediaType.APPLICATION_JSON })
 	@Operation(summary = "Listar Despesas", description = "Listar todas as despesas em JSON.", tags = {
 			"Despesas" }, responses = { @ApiResponse(description = "Success", responseCode = "200", content = {
