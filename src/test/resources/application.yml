@@ -3,7 +3,12 @@ server:
 cors:
   originPatterns: http://localhost:8080,https://familybudgetcontrol.com.br
 file:
-  upload-dir: /files/upload-dir #diretório para salvar os arquivos 
+  upload-dir: /files/upload-dir #diretório para salvar os arquivos
+security:
+  jwt:
+    token:
+      secret-key: 53cr53
+      expire-length: 3600000
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -25,6 +30,7 @@ management:
       show-details: always
 springdoc:
   pathsToMatch: #para restrigir as descrições
+  - /auth/** 
   - /budget-control/**
   swagger-ui:
     use-root-path: true #acessível diretamente do caminho raiz 

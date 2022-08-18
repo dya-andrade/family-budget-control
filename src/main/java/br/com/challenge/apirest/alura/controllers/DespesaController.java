@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.challenge.apirest.alura.services.CacheService;
 import br.com.challenge.apirest.alura.services.DespesaService;
+import br.com.challenge.apirest.alura.services.infra.CacheService;
 import br.com.challenge.apirest.alura.util.MediaType;
 import br.com.challenge.apirest.alura.vo.DespesaVO;
 import io.swagger.v3.oas.annotations.Operation;

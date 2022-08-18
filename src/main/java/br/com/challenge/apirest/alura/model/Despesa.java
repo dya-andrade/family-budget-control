@@ -23,7 +23,7 @@ public class Despesa implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@Lob
 	@Column(nullable = false)
@@ -41,11 +41,11 @@ public class Despesa implements Serializable {
 	
 	public Despesa() {}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

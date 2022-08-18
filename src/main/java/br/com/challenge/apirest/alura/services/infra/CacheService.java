@@ -1,4 +1,4 @@
-package br.com.challenge.apirest.alura.services;
+package br.com.challenge.apirest.alura.services.infra;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
