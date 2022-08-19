@@ -60,19 +60,19 @@ public class AutenticacaoService {
 			return ResponseEntity.ok(tokenResponse);
 	}
 
-	public ResponseEntity<?> refreshToken(String email, String refreshToken) {
+	public ResponseEntity<?> refreshToken(String nome, String refreshToken) {
 
-		if (checkIfParamsIsNotNull(email, refreshToken))
+		if (checkIfParamsIsNotNull(nome, refreshToken))
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solicitação de cliente inválida!");
 
-		var user = repository.findByEmail(email);
+		var user = repository.findByNome(nome);
 
 		var tokenResponse = new TokenVO();
 
 		if (user != null) {
 			tokenResponse = tokenProvider.refreshToken(refreshToken);
 		} else {
-			throw new UsernameNotFoundException("Email " + email + " não encontrado!");
+			throw new UsernameNotFoundException("Usuário " + nome + " não encontrado!");
 		}
 
 		if(tokenResponse == null)

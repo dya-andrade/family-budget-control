@@ -1,6 +1,7 @@
 package br.com.challenge.apirest.alura.unit.integration.repositories;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -27,6 +28,7 @@ import br.com.challenge.apirest.alura.model.Receita;
 import br.com.challenge.apirest.alura.repositories.ReceitaRepository;
 import br.com.challenge.apirest.alura.testcontainers.AbstractIntegrationTest;
 
+
 //@RunWith(SpringRunner.class) JUnit 4
 @ExtendWith(SpringExtension.class) // JUnit5
 @DataJpaTest // não precisa do context do spring, apenas do JPA
@@ -42,9 +44,9 @@ public class ReceitaRepositoryTest extends AbstractIntegrationTest { // abstract
 	@Order(1) // Simulando REPOSITORY
 	public void testFindByDescricaoAndMes() {
 
-		Receita receita = repository.findByDescricaoAndMes("Salário", 8);
+		Receita receita = repository.findByDescricaoAndMes("Freelancer", 8);
 
-		assertNotNull(receita);
+		assertNull(receita);
 	}
 	
 	@Test

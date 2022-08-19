@@ -4,4 +4,4 @@ CREATE TABLE `despesas` (
   `valor` double NOT NULL,
   `data` date NOT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;

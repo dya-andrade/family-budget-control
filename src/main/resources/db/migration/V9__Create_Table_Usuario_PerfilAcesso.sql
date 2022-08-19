@@ -5,4 +5,4 @@ CREATE TABLE `usuarios_perfis_acesso` (
   KEY `usuarios_perfis_acesso_FK_1` (`id_perfil_acesso`),
   CONSTRAINT `usuarios_perfis_acesso_FK` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
   CONSTRAINT `usuarios_perfis_acesso_FK_1` FOREIGN KEY (`id_perfil_acesso`) REFERENCES `perfis_acesso` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;

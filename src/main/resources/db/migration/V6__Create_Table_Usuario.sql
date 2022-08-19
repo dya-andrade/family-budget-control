@@ -4,5 +4,6 @@
   `email` varchar(255) DEFAULT NULL,
   `senha` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_email` (`email`)
-) ENGINE=InnoDB;
+  UNIQUE KEY `uk_email` (`email`),
+  UNIQUE KEY `uk_nome` (`nome`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;

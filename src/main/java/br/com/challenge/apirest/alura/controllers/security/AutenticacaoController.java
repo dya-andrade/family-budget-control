@@ -35,11 +35,11 @@ public class AutenticacaoController {
 
 	@Operation(summary = "Autenticação via token, com path username.", description = "Autenticação via token, e path username com retorno do token refresh.", tags = {
 			"Autenticação" })
-	@PutMapping(value = "/refresh/{username}")
-	public ResponseEntity<?> refreshToken(@PathVariable("username") String username,
+	@PutMapping(value = "/refresh/{nome}")
+	public ResponseEntity<?> refreshToken(@PathVariable("nome") String nome,
 			@RequestHeader("Authorization") String refreshToken) {
 
-		var token = service.refreshToken(username, refreshToken);
+		var token = service.refreshToken(nome, refreshToken);
 
 		return token;
 	}
