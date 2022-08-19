@@ -17,9 +17,12 @@ A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do 
 e de integração
 * <b>Apache POI</b> para geração de XLSX
 * <b>Swagger</b> para documentação dos endpoints
+* <b>JWT</b> com security para autentição via token
 
-## NOVIDADES
-Pretendo continuar evoluindo o projeto colocando JWT (Security, Roles e Profile).
+## VERSION
+ 
+ Java 17 JDK
+
 
 ## ENDPOINT's
 
