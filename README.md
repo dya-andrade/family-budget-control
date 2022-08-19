@@ -17,7 +17,7 @@ A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do 
 e de integração
 * <b>Apache POI</b> para geração de XLSX
 * <b>Swagger</b> para documentação dos endpoints
-* <b>JWT</b> com security para autentição via token
+* <b>JWT</b> com security para autenticação via token
 
 ## VERSION
  
@@ -149,7 +149,7 @@ Passando `mes and ano` via path, é gerado um XLSX.
 
 </br>
 
-- Autentição via credenciais
+- Autenticação via credenciais
 <p></p>
 Passando `email and senha` via body em JSON
 
