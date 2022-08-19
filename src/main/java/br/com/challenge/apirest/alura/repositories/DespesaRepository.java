@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import br.com.challenge.apirest.alura.model.Despesa;
 import br.com.challenge.apirest.alura.vo.CategoriaVO;
 
-public interface DespesaRepository extends JpaRepository<Despesa, Integer> {
+public interface DespesaRepository extends JpaRepository<Despesa, Long> {
 
 	@Query("SELECT d FROM Despesa d WHERE d.descricao = :descricao AND MONTH(d.data) = :mes") 
 	Despesa findByDescricaoAndMes(String descricao, int mes);

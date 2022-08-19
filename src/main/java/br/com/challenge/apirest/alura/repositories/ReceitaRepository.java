@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import br.com.challenge.apirest.alura.model.Receita;
 
 @Repository
-public interface ReceitaRepository extends JpaRepository<Receita, Integer> {
+public interface ReceitaRepository extends JpaRepository<Receita, Long> {
 
 	@Query("SELECT r FROM Receita r WHERE r.descricao = :descricao AND MONTH(r.data) = :mes")
 	Receita findByDescricaoAndMes(String descricao, int mes);

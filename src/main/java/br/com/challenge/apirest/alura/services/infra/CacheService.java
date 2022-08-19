@@ -10,7 +10,7 @@ public class CacheService {
 	private static String[] DESPESAS = { "listaDespesas", "listaDespesasMes", "resumoMes", "resumoMesExcel" };
 
 	private static String[] RECEITAS = { "listaReceitas", "listaReceitasMes", "resumoMes", "resumoMesExcel" };
-	
+		
 	@Autowired
 	private CacheManager cacheManager;
 
