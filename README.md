@@ -19,7 +19,7 @@ e de integração
 * <b>Swagger</b> para documentação dos endpoints
 * <b>JWT</b> com security para autenticação via token
 
-## VERSION
+## VERSÃO
  
  Java 17 JDK
 
