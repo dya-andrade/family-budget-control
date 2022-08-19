@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 
 				.authorizeRequests()
-				.antMatchers("/auth/signin", "/auth/refresh", "/v3/api-docs/**", "/swagger-ui/**", "/actuator/**")
+				.antMatchers("/budget-control/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/actuator/**")
 				.permitAll().antMatchers(HttpMethod.DELETE, "/budget-control/**").hasRole("ADMINISTRADOR").anyRequest()
 				.authenticated()
 

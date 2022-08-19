@@ -85,9 +85,9 @@ public abstract class MovimentacaoService<E extends Movimentacao, V extends Movi
 		return vo;
 	}
 
-	public V update(Long id, V movimentacaoVO) {
+	public V update(Long id, V vo) {
 
-		if (movimentacaoVO == null)
+		if (vo == null)
 			throw new RequiredObjectIsNullException();
 
 		logger.info("Editando uma entidade!");
@@ -95,9 +95,9 @@ public abstract class MovimentacaoService<E extends Movimentacao, V extends Movi
 		E entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Nenhuma entidade encontrada com este ID!"));
 
-		entity = this.setUpdate(entity, movimentacaoVO);
+		entity = this.setUpdate(entity, vo);
 
-		var vo = this.parseVO(repository.save(entity));
+		vo = this.parseVO(repository.save(entity));
 
 		logger.info("Entidade editada!");
 

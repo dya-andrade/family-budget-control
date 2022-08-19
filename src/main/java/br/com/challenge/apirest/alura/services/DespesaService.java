@@ -49,6 +49,7 @@ public class DespesaService extends MovimentacaoService<Despesa, DespesaVO, Desp
 		entity.setDescricao(vo.getDescricao());
 		entity.setData(vo.getData());
 		entity.setValor(vo.getValor());
+		entity.setCategoria(vo.getCategoria());
 
 		return entity;
 	}

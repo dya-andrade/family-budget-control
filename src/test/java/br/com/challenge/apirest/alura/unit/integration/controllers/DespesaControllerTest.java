@@ -34,6 +34,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import br.com.challenge.apirest.alura.model.Categoria;
 import br.com.challenge.apirest.alura.testcontainers.AbstractIntegrationTest;
 import br.com.challenge.apirest.alura.vo.DespesaVO;
+import br.com.challenge.apirest.alura.vo.security.TokenVO;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT) // port 8888
 @TestMethodOrder(OrderAnnotation.class) 
@@ -49,6 +50,8 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 	private static URI uri;
 	
 	private static int id = 2;
+	
+	private static TokenVO tokenVO;
 
 
 	@BeforeAll // executado antes de cada método
@@ -72,6 +75,16 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 		return json.toString();
 	}
 	
+	private String jsonCredenciais() throws JSONException {
+		JSONObject json = new JSONObject();
+		
+		//PERFIL USUARIO
+		json.put("email", "dyane_araujo@outlook.com");
+		json.put("senha", "senha123senha");
+		
+		return json.toString();
+	}
+	
 	private void assertVO(DespesaVO vo) {
 		assertNotNull(vo);
 		assertNotNull(vo.getDescricao());
@@ -85,12 +98,32 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 	}
 	
 	@Test
+	@Order(0) //Simulando CONTROLLER
+	public void testAutenticacao() throws Exception {
+		
+		URI uriAuth = new URI("/budget-control/auth/signin");
+		
+		String content = mockMvc.perform(
+				MockMvcRequestBuilders
+				.post(uriAuth)
+				.content(jsonCredenciais())
+				.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+		.andReturn().getResponse().getContentAsString();
+		
+		tokenVO = objectMapper.readValue(content, TokenVO.class);
+		
+		assertNotNull(tokenVO);
+	}
+	
+	@Test
 	@Order(1) //Simulando CONTROLLER
 	public void testCreateIsSuccess() throws Exception {
 		
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.post(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.content(jsonDespesa())
 				.contentType(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
@@ -109,6 +142,7 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 		mockMvc.perform(
 				MockMvcRequestBuilders
 				.post(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.content(jsonDespesa())
 				.contentType(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is4xxClientError());
@@ -120,11 +154,14 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.get(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 		
-		List<DespesaVO> despesas = objectMapper.readValue(content, new TypeReference<List<DespesaVO>>(){});
+        JSONObject jsonObject = new JSONObject(content);
+        
+		List<DespesaVO> despesas = objectMapper.readValue(jsonObject.getString("content"), new TypeReference<List<DespesaVO>>(){});
 		
 		assertFalse(despesas.isEmpty());
 		
@@ -137,12 +174,15 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.get(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.queryParam("descricao", "Pets")
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andReturn().getResponse().getContentAsString();
 		
-		List<DespesaVO> despesas = objectMapper.readValue(content, new TypeReference<List<DespesaVO>>(){});
+		JSONObject jsonObject = new JSONObject(content);
+		
+		List<DespesaVO> despesas = objectMapper.readValue(jsonObject.getString("content"), new TypeReference<List<DespesaVO>>(){});
 		
 		assertFalse(despesas.isEmpty());
 		
@@ -158,6 +198,7 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.get(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andReturn().getResponse().getContentAsString();
@@ -177,6 +218,7 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.get(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
@@ -195,6 +237,7 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 		mockMvc.perform(
 				MockMvcRequestBuilders
 				.put(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.content(jsonDespesa())
 				.contentType(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
@@ -202,6 +245,52 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 	
 	@Test
 	@Order(8)
+	public void testDeleteIsErrorAcessRole() throws Exception {	
+		
+		//sem perfil de acesso para delete
+		
+		uri = new URI("/budget-control/despesas/" + id); 
+		
+		mockMvc.perform(
+				MockMvcRequestBuilders
+				.delete(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+	}
+	
+	private String jsonCredenciaisAdmin() throws JSONException {
+		JSONObject json = new JSONObject();
+		
+		//PERFIL ADMIN
+		json.put("email", "dyane.aaraujo@gmail.com");
+		json.put("senha", "senha123senha");
+		
+		return json.toString();
+	}
+	
+	@Test
+	@Order(9) //Simulando CONTROLLER
+	public void testAutenticacaoRoleAdmin() throws Exception {
+		
+		URI uriAuth = new URI("/budget-control/auth/signin");
+		
+		String content = mockMvc.perform(
+				MockMvcRequestBuilders
+				.post(uriAuth)
+				.content(jsonCredenciaisAdmin())
+				.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+		.andReturn().getResponse().getContentAsString();
+		
+		tokenVO = objectMapper.readValue(content, TokenVO.class);
+		
+		assertNotNull(tokenVO);
+	}
+	
+	
+	@Test
+	@Order(10)
 	public void testDeleteIsSuccess() throws Exception {	
 				
 		uri = new URI("/budget-control/despesas/" + id); 
@@ -209,12 +298,13 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 		mockMvc.perform(
 				MockMvcRequestBuilders
 				.delete(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	}
 	
 	@Test
-	@Order(9)
+	@Order(11)
 	public void testDeleteIsError() throws Exception {	
 		
 		//ID não encontrado
@@ -224,6 +314,7 @@ public class DespesaControllerTest extends AbstractIntegrationTest { // TestCont
 		mockMvc.perform(
 				MockMvcRequestBuilders
 				.delete(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 	}

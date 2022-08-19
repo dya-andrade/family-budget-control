@@ -16,7 +16,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/budget-control/auth")
 @Tag(name = "Autenticação", description = "Token para acesso aos endpoints.")
 public class AutenticacaoController {
 

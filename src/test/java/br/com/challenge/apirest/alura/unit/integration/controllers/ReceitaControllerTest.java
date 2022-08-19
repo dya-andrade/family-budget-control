@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,6 +33,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import br.com.challenge.apirest.alura.testcontainers.AbstractIntegrationTest;
 import br.com.challenge.apirest.alura.vo.ReceitaVO;
+import br.com.challenge.apirest.alura.vo.security.TokenVO;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT) // port 8888
 @TestMethodOrder(OrderAnnotation.class) 
@@ -47,6 +49,8 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 	private static URI uri;
 	
 	private static int id = 2;
+	
+	private static TokenVO tokenVO;
 
 
 	@BeforeAll // executado antes de cada método
@@ -69,6 +73,16 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 		return json.toString();
 	}
 	
+	private String jsonCredenciais() throws JSONException {
+		JSONObject json = new JSONObject();
+		
+		//PERFIL USUARIO
+		json.put("email", "dyane_araujo@outlook.com");
+		json.put("senha", "senha123senha");
+		
+		return json.toString();
+	}
+	
 	private void assertVO(ReceitaVO vo) {
 		assertNotNull(vo);
 		assertNotNull(vo.getDescricao());
@@ -81,12 +95,32 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 	}
 	
 	@Test
+	@Order(0) //Simulando CONTROLLER
+	public void testAutenticacao() throws Exception {
+		
+		URI uriAuth = new URI("/budget-control/auth/signin");
+		
+		String content = mockMvc.perform(
+				MockMvcRequestBuilders
+				.post(uriAuth)
+				.content(jsonCredenciais())
+				.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+		.andReturn().getResponse().getContentAsString();
+		
+		tokenVO = objectMapper.readValue(content, TokenVO.class);
+		
+		assertNotNull(tokenVO);
+	}
+	
+	@Test
 	@Order(1) //Simulando CONTROLLER
 	public void testCreateIsSuccess() throws Exception {
 		
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.post(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.content(jsonReceita())
 				.contentType(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
@@ -105,6 +139,7 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 		mockMvc.perform(
 				MockMvcRequestBuilders
 				.post(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.content(jsonReceita())
 				.contentType(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is4xxClientError());
@@ -116,15 +151,18 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.get(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-		.andReturn().getResponse().getContentAsString();
+		.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 		
-		List<ReceitaVO> receitas = objectMapper.readValue(content, new TypeReference<List<ReceitaVO>>(){});
+        JSONObject jsonObject = new JSONObject(content);
+		
+		List<ReceitaVO> receitas = objectMapper.readValue(jsonObject.getString("content"), new TypeReference<List<ReceitaVO>>(){});
 		
 		assertFalse(receitas.isEmpty());
 		
-		assertVO(receitas.get(1));
+		assertVO(receitas.get(0));
 	}
 	
 	@Test
@@ -133,12 +171,15 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.get(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.queryParam("descricao", "Mesada")
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-		.andReturn().getResponse().getContentAsString();
+		.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 		
-		List<ReceitaVO> receitas = objectMapper.readValue(content, new TypeReference<List<ReceitaVO>>(){});
+        JSONObject jsonObject = new JSONObject(content);
+		
+		List<ReceitaVO> receitas = objectMapper.readValue(jsonObject.getString("content"), new TypeReference<List<ReceitaVO>>(){});
 		
 		assertFalse(receitas.isEmpty());
 		
@@ -154,6 +195,7 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.get(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andReturn().getResponse().getContentAsString();
@@ -173,6 +215,7 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.get(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andReturn().getResponse().getContentAsString();
@@ -191,6 +234,7 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 		mockMvc.perform(
 				MockMvcRequestBuilders
 				.put(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.content(jsonReceita())
 				.contentType(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
@@ -198,19 +242,65 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 	
 	@Test
 	@Order(8)
-	public void testDeleteIsSuccess() throws Exception {	
+	public void testDeleteIsErrorAcessRole() throws Exception {	
 				
+		//sem perfil de acesso para delete
+		
 		uri = new URI("/budget-control/receitas/" + id); 
 		
 		mockMvc.perform(
 				MockMvcRequestBuilders
 				.delete(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+	}
+	
+	private String jsonCredenciaisAdmin() throws JSONException {
+		JSONObject json = new JSONObject();
+		
+		//PERFIL ADMIN
+		json.put("email", "dyane.aaraujo@gmail.com");
+		json.put("senha", "senha123senha");
+		
+		return json.toString();
+	}
+	
+	@Test
+	@Order(9) //Simulando CONTROLLER
+	public void testAutenticacaoRoleAdmin() throws Exception {
+		
+		URI uriAuth = new URI("/budget-control/auth/signin");
+		
+		String content = mockMvc.perform(
+				MockMvcRequestBuilders
+				.post(uriAuth)
+				.content(jsonCredenciaisAdmin())
+				.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+		.andReturn().getResponse().getContentAsString();
+		
+		tokenVO = objectMapper.readValue(content, TokenVO.class);
+		
+		assertNotNull(tokenVO);
+	}
+	
+	@Test
+	@Order(10)
+	public void testDeleteIsSuccess() throws Exception {	
+						
+		uri = new URI("/budget-control/receitas/" + id); 
+		
+		mockMvc.perform(
+				MockMvcRequestBuilders
+				.delete(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	}
 	
 	@Test
-	@Order(9)
+	@Order(11)
 	public void testDeleteIsError() throws Exception {	
 		
 		//ID não encontrado
@@ -220,6 +310,7 @@ public class ReceitaControllerTest extends AbstractIntegrationTest { // TestCont
 		mockMvc.perform(
 				MockMvcRequestBuilders
 				.delete(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is4xxClientError());
 	}

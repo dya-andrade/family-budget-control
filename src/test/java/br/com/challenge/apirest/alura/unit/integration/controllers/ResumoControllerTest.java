@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -26,6 +28,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import br.com.challenge.apirest.alura.testcontainers.AbstractIntegrationTest;
 import br.com.challenge.apirest.alura.vo.ResumoVO;
+import br.com.challenge.apirest.alura.vo.security.TokenVO;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT) // port 8888
 @TestMethodOrder(OrderAnnotation.class) 
@@ -40,12 +43,42 @@ public class ResumoControllerTest extends AbstractIntegrationTest { // TestConta
 	
 	private static URI uri;
 
+	private static TokenVO tokenVO;
 
 	@BeforeAll // executado antes de cada método
 	void setUp() throws Exception {		
 		objectMapper = new ObjectMapper();
 		objectMapper.registerModule(new JavaTimeModule());
 		objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+	}
+	
+	private String jsonCredenciais() throws JSONException {
+		JSONObject json = new JSONObject();
+		
+		//PERFIL USUARIO
+		json.put("email", "dyane_araujo@outlook.com");
+		json.put("senha", "senha123senha");
+		
+		return json.toString();
+	}
+	
+	@Test
+	@Order(0) //Simulando CONTROLLER
+	public void testAutenticacao() throws Exception {
+		
+		URI uriAuth = new URI("/budget-control/auth/signin");
+		
+		String content = mockMvc.perform(
+				MockMvcRequestBuilders
+				.post(uriAuth)
+				.content(jsonCredenciais())
+				.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+		.andReturn().getResponse().getContentAsString();
+		
+		tokenVO = objectMapper.readValue(content, TokenVO.class);
+		
+		assertNotNull(tokenVO);
 	}
 	
 	@Test
@@ -57,6 +90,7 @@ public class ResumoControllerTest extends AbstractIntegrationTest { // TestConta
 		String content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.get(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
@@ -77,6 +111,7 @@ public class ResumoControllerTest extends AbstractIntegrationTest { // TestConta
 		byte[] content = mockMvc.perform(
 				MockMvcRequestBuilders
 				.get(uri)
+				.header("Authorization", "Bearer " + tokenVO.getAccessToken())
 				.accept(MediaType.MULTIPART_FORM_DATA))
 		.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andReturn().getResponse().getContentAsByteArray();

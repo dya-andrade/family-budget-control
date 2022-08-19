@@ -29,8 +29,7 @@ management:
     health:
       show-details: always
 springdoc:
-  pathsToMatch: #para restrigir as descrições
-  - /auth/** 
+  pathsToMatch: #para restrigir as descrições 
   - /budget-control/**
   swagger-ui:
     use-root-path: true #acessível diretamente do caminho raiz 
