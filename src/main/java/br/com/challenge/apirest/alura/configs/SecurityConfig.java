@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 
 				.authorizeRequests()
-				.antMatchers("/auth/signin", "/auth/refresh", "/api-docs/**", "/swagger-ui.html**", "/actuator/**")
+				.antMatchers("/auth/signin", "/auth/refresh", "/v3/api-docs/**", "/swagger-ui/**", "/actuator/**")
 				.permitAll().antMatchers(HttpMethod.DELETE, "/budget-control/**").hasRole("ADMINISTRADOR").anyRequest()
 				.authenticated()
 
@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override // configs de recursos estaticos (js, css, images, etc.)
 	public void configure(WebSecurity web) throws Exception {
-
+		web.ignoring().antMatchers("/swagger-ui/**", "/bus/v3/api-docs/**");
 	}
 
 	@Bean

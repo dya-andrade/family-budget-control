@@ -2,6 +2,8 @@ package br.com.challenge.apirest.alura.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.challenge.apirest.alura.mapper.DozerMapper;
@@ -13,18 +15,18 @@ import br.com.challenge.apirest.alura.vo.DespesaVO;
 public class DespesaService extends MovimentacaoService<Despesa, DespesaVO, DespesaRepository> {
 
 	@Override
-	protected Despesa findByDescricaoAndMes(String descricao, int mes) {
+	protected Despesa repositoryFindByDescricaoAndMes(String descricao, int mes) {
 		return repository.findByDescricaoAndMes(descricao, mes);
 	}
 
 	@Override
-	public List<DespesaVO> findByMonth(int ano, int mes) {
+	public List<DespesaVO> repositoryFindByMonth(int ano, int mes) {
 		return DozerMapper.parseListObjects(repository.findByMonth(ano, mes), DespesaVO.class);
 	}
 
 	@Override
-	public List<DespesaVO> findByDescricao(String descricao) {
-		return DozerMapper.parseListObjects(repository.findByDescricao(descricao), DespesaVO.class);	
+	public Page<DespesaVO> repositoryFindByDescricao(String descricao, Pageable pageable) {
+		return parseListPageVO(repository.findByDescricao(descricao, pageable));	
 	}
 
 	@Override
@@ -38,8 +40,8 @@ public class DespesaService extends MovimentacaoService<Despesa, DespesaVO, Desp
 	}
 
 	@Override
-	protected List<DespesaVO> parseListVO(List<Despesa> vos) {
-		return DozerMapper.parseListObjects(vos, DespesaVO.class);
+	protected Page<DespesaVO> parseListPageVO(Page<Despesa> vos) {
+		return vos.map(p -> DozerMapper.parseObject(p, DespesaVO.class));
 	}
 
 	@Override

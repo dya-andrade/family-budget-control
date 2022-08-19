@@ -15,15 +15,16 @@ import br.com.challenge.apirest.alura.vo.security.UsuarioCredenciais;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Authentication", description = "Endpoints.")
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Autenticação", description = "Token para acesso aos endpoints.")
 public class AutenticacaoController {
 
 	@Autowired
 	private AutenticacaoService service;
 
-	@Operation(summary = "Authenticates a user and returns a token")
+	@Operation(summary = "Autenticação via crendenciais do usuario.", description = "Autenticação via crendenciais do usuario com retorno do token de acesso.", tags = {
+			"Autenticação" })
 	@PostMapping(value = "/signin")
 	public ResponseEntity<?> signin(@RequestBody UsuarioCredenciais data) {
 
@@ -32,7 +33,8 @@ public class AutenticacaoController {
 		return token;
 	}
 
-	@Operation(summary = "Refresh token for authenticated a user and returns a token")
+	@Operation(summary = "Autenticação via token, com path username.", description = "Autenticação via token, e path username com retorno do token refresh.", tags = {
+			"Autenticação" })
 	@PutMapping(value = "/refresh/{username}")
 	public ResponseEntity<?> refreshToken(@PathVariable("username") String username,
 			@RequestHeader("Authorization") String refreshToken) {

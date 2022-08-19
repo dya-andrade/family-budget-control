@@ -2,6 +2,8 @@ package br.com.challenge.apirest.alura.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,7 +17,7 @@ public interface ReceitaRepository extends JpaRepository<Receita, Long> {
 	Receita findByDescricaoAndMes(String descricao, int mes);
 
 	@Query("SELECT r FROM Receita r WHERE r.descricao LIKE LOWER(CONCAT ('%',:descricao,'%'))")
-	List<Receita> findByDescricao(String descricao); // LOWER - converte para minúsculo
+	Page<Receita> findByDescricao(String descricao, Pageable pageable); // LOWER - converte para minúsculo
 
 	@Query("SELECT r FROM Receita r WHERE YEAR(r.data) = :ano AND MONTH(r.data) = :mes")
 	List<Receita> findByMonth(Integer ano, Integer mes);

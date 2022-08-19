@@ -22,7 +22,7 @@ public class AutorizacaoService implements UserDetailsService {
 		Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
 		if(usuario.isPresent()) return usuario.get();
 		
-		throw new UsernameNotFoundException("Dados inválidos!");
+		throw new UsernameNotFoundException("Email " + email + " não encontrado!");
 	}
 
 }

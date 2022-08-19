@@ -3,39 +3,47 @@ package br.com.challenge.apirest.alura.vo.security;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.validation.constraints.NotBlank;
+
+@NotBlank
 public class UsuarioCredenciais implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String username;
-	private String password;
+	private String email;
+	private String senha;
 	
 	public UsuarioCredenciais(){}
 
-	public UsuarioCredenciais(String username, String password) {
-		this.username = username;
-		this.password = password;
+	@JsonCreator
+	public UsuarioCredenciais(@JsonProperty(value = "email", required = true) String email, 
+			@JsonProperty(value = "senha", required = true) String senha) {
+		this.email = email;
+		this.senha = senha;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(password, username);
+		return Objects.hash(email, senha);
 	}
 
 	@Override
@@ -47,7 +55,6 @@ public class UsuarioCredenciais implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		UsuarioCredenciais other = (UsuarioCredenciais) obj;
-		return Objects.equals(password, other.password) && Objects.equals(username, other.username);
+		return Objects.equals(email, other.email) && Objects.equals(senha, other.senha);
 	}
-
 }

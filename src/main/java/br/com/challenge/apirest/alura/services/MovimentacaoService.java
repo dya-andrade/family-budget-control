@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,17 +25,17 @@ public abstract class MovimentacaoService<E extends Movimentacao, V extends Movi
 	@Autowired
 	protected R repository;
 
-	protected abstract E findByDescricaoAndMes(String descricao, int mes);
+	protected abstract E repositoryFindByDescricaoAndMes(String descricao, int mes);
 
-	public abstract List<V> findByMonth(int ano, int mes);
+	public abstract List<V> repositoryFindByMonth(int ano, int mes);
 
-	public abstract List<V> findByDescricao(String descricao);
+	public abstract Page<V> repositoryFindByDescricao(String descricao, Pageable pageable);
 
 	protected abstract E parseEntity(V vo);
 
 	protected abstract V parseVO(E entity);
 	
-	protected abstract List<V> parseListVO(List<E> entities);
+	protected abstract Page<V> parseListPageVO(Page<E> entities);
 
 	protected abstract E setUpdate(E entity, V vo);
 
@@ -44,7 +46,7 @@ public abstract class MovimentacaoService<E extends Movimentacao, V extends Movi
 
 		int mes = vo.getData().getMonth().getValue();
 
-		E duplicada = this.findByDescricaoAndMes(vo.getDescricao(), mes);
+		E duplicada = this.repositoryFindByDescricaoAndMes(vo.getDescricao(), mes);
 
 		if (duplicada != null)
 			throw new AlreadyRegisteredException();
@@ -62,11 +64,11 @@ public abstract class MovimentacaoService<E extends Movimentacao, V extends Movi
 		return vo;
 	}
 
-	public List<V> findAll() {
+	public Page<V> findAll(Pageable pageable) {
 
 		logger.info("Buscando todas as entidades!");
 
-		var vos = this.parseListVO(repository.findAll());
+		var vos = this.parseListPageVO(repository.findAll(pageable));
 
 		return vos;
 	}
@@ -114,20 +116,20 @@ public abstract class MovimentacaoService<E extends Movimentacao, V extends Movi
 		logger.info("Entidade deletada!");
 	}
 
-	public List<V> buscaPorDescricao(String descricao) {
+	public Page<V> findByDescricao(String descricao, Pageable pageable) {
 
 		logger.info("Buscando entidades pela descrição!");
 
-		var vos = this.findByDescricao(descricao);
+		var vos = this.repositoryFindByDescricao(descricao, pageable);
 
 		return vos;
 	}
 
-	public List<V> buscaPeloMes(Integer ano, Integer mes) {
+	public List<V> findByMonth(Integer ano, Integer mes) {
 
 		logger.info("Buscando entidades pelo mês/ano!");
 
-		var vos = this.findByMonth(ano, mes);
+		var vos = this.repositoryFindByMonth(ano, mes);
 
 		return vos;
 	}

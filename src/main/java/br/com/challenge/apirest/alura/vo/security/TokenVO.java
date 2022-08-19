@@ -4,59 +4,69 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class TokenVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String username;
-	private Boolean authenticated;
-	private Date created;
-	private Date expiration;
-	private String accessToken;
-	private String refreshToken;
-	
-	public TokenVO() {}
+	private String email;
 
-	public TokenVO(String username, Boolean authenticated, Date created, Date expiration, String accessToken,
+	private Boolean autenticado;
+
+	private Date criado;
+
+	private Date expiracao;
+
+	@JsonProperty(value = "access_token")
+	private String accessToken;
+	
+	@JsonProperty(value = "refresh_token")
+	private String refreshToken;
+
+	public TokenVO() {
+	}
+
+	public TokenVO(String email, Boolean autenticado, Date criado, Date expiracao, String accessToken,
 			String refreshToken) {
-		this.username = username;
-		this.authenticated = authenticated;
-		this.created = created;
-		this.expiration = expiration;
+		this.email = email;
+		this.autenticado = autenticado;
+		this.criado = criado;
+		this.expiracao = expiracao;
 		this.accessToken = accessToken;
 		this.refreshToken = refreshToken;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public Boolean getAuthenticated() {
-		return authenticated;
+	public Boolean getAutenticado() {
+		return autenticado;
 	}
 
-	public void setAuthenticated(Boolean authenticated) {
-		this.authenticated = authenticated;
+	public void setAutenticado(Boolean autenticado) {
+		this.autenticado = autenticado;
 	}
 
-	public Date getCreated() {
-		return created;
+	public Date getCriado() {
+		return criado;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCriado(Date criado) {
+		this.criado = criado;
 	}
 
-	public Date getExpiration() {
-		return expiration;
+	public Date getExpiracao() {
+		return expiracao;
 	}
 
-	public void setExpiration(Date expiration) {
-		this.expiration = expiration;
+	public void setExpiracao(Date expiracao) {
+		this.expiracao = expiracao;
 	}
 
 	public String getAccessToken() {
@@ -77,7 +87,7 @@ public class TokenVO implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(accessToken, authenticated, created, expiration, refreshToken, username);
+		return Objects.hash(accessToken, autenticado, criado, email, expiracao, refreshToken);
 	}
 
 	@Override
@@ -89,9 +99,8 @@ public class TokenVO implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TokenVO other = (TokenVO) obj;
-		return Objects.equals(accessToken, other.accessToken) && Objects.equals(authenticated, other.authenticated)
-				&& Objects.equals(created, other.created) && Objects.equals(expiration, other.expiration)
-				&& Objects.equals(refreshToken, other.refreshToken) && Objects.equals(username, other.username);
+		return Objects.equals(accessToken, other.accessToken) && Objects.equals(autenticado, other.autenticado)
+				&& Objects.equals(criado, other.criado) && Objects.equals(email, other.email)
+				&& Objects.equals(expiracao, other.expiracao) && Objects.equals(refreshToken, other.refreshToken);
 	}
-
 }

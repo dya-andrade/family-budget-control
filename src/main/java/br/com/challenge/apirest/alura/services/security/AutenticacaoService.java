@@ -30,63 +30,63 @@ public class AutenticacaoService {
 	public ResponseEntity<?> signin(UsuarioCredenciais data) {
 
 		if (checkIfParamsIsNotNull(data))
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solicitação de cliente inválida!");
 
 		var tokenResponse = new TokenVO();
 
 		try {
 
-			var username = data.getUsername();
-			var password = data.getPassword();
+			var email = data.getEmail();
+			var senha = data.getSenha();
 			
-			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, password);
+			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, senha);
 			authManager.authenticate(authentication);
 
-			var user = repository.findByEmail(username);
+			var user = repository.findByEmail(email);
 
 			if (user.isPresent()) {
-				tokenResponse = tokenProvider.createAccessToken(username, user.get().getRoles());
+				tokenResponse = tokenProvider.createAccessToken(email, user.get().getRoles());
 			} else {
-				throw new UsernameNotFoundException("Username " + username + " not found!");
+				throw new UsernameNotFoundException("Email " + email + " não encontrado!");
 			}
 
 		} catch (Exception e) {
-			throw new BadCredentialsException("Invalid username/password supplied!");
+			throw new BadCredentialsException("Email ou senha inválidos!");
 		}
 
 		if (tokenResponse == null)
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solicitação de cliente inválida!");
 		else
 			return ResponseEntity.ok(tokenResponse);
 	}
 
-	public ResponseEntity<?> refreshToken(String username, String refreshToken) {
+	public ResponseEntity<?> refreshToken(String email, String refreshToken) {
 
-		if (checkIfParamsIsNotNull(username, refreshToken))
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+		if (checkIfParamsIsNotNull(email, refreshToken))
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solicitação de cliente inválida!");
 
-		var user = repository.findByEmail(username);
+		var user = repository.findByEmail(email);
 
 		var tokenResponse = new TokenVO();
 
 		if (user != null) {
 			tokenResponse = tokenProvider.refreshToken(refreshToken);
 		} else {
-			throw new UsernameNotFoundException("Username " + username + " not found!");
+			throw new UsernameNotFoundException("Email " + email + " não encontrado!");
 		}
 
 		if(tokenResponse == null)
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solicitação de cliente inválida!");
 		else
 			return ResponseEntity.ok(tokenResponse);
 	}
 
-	private boolean checkIfParamsIsNotNull(String username, String refreshToken) {
-		return refreshToken == null || refreshToken.isBlank() || username == null || username.isBlank();
+	private boolean checkIfParamsIsNotNull(String email, String refreshToken) {
+		return refreshToken == null || refreshToken.isBlank() || email == null || email.isBlank();
 	}
 
 	private boolean checkIfParamsIsNotNull(UsuarioCredenciais data) {
-		return data == null || data.getUsername() == null || data.getUsername().isBlank() || data.getPassword() == null
-				|| data.getPassword().isBlank();
+		return data == null || data.getEmail() == null || data.getEmail().isBlank() || data.getSenha() == null
+				|| data.getSenha().isBlank();
 	}
 }

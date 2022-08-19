@@ -16,6 +16,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.challenge.apirest.alura.model.Despesa;
@@ -46,7 +51,9 @@ public class DespesaRepositoryTest extends AbstractIntegrationTest { // abstract
 	@Order(2) // Simulando REPOSITORY
 	public void testFindByDescricao() {
 
-		List<Despesa> despesas = repository.findByDescricao("dade");
+		Pageable pageable = PageRequest.of(0, 5, Sort.by(Direction.ASC, "descricao"));
+
+		Page<Despesa> despesas = repository.findByDescricao("dade", pageable);
 
 		assertFalse(despesas.isEmpty());
 	}

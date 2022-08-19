@@ -16,6 +16,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.challenge.apirest.alura.model.Receita;
@@ -45,8 +50,10 @@ public class ReceitaRepositoryTest extends AbstractIntegrationTest { // abstract
 	@Test
 	@Order(2) // Simulando REPOSITORY
 	public void testFindByDescricao() {
+		
+		Pageable pageable = PageRequest.of(0, 5, Sort.by(Direction.ASC, "descricao"));
 
-		List<Receita> receitas = repository.findByDescricao("o");
+		Page<Receita> receitas = repository.findByDescricao("o", pageable);
 
 		assertFalse(receitas.isEmpty());
 	}
