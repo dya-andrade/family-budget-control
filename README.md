@@ -19,6 +19,9 @@ e de integração
 * <b>Swagger</b> para documentação dos endpoints
 * <b>JWT</b> com security para autenticação via token
 
+* <b>Docker<b/> para buildar/run e subir os containers na AWS
+[![Docker Hub Repo](https://img.shields.io/docker/pulls/mulhermarav/familybudgetcontrol.svg)](https://hub.docker.com/repository/docker/mulhermarav/familybudgetcontrol)
+
 ## VERSÃO
  
  Java 17 JDK
