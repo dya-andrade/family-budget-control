@@ -2,8 +2,8 @@
 Challenge Back-end do Alura, sobre API REST de Controle de Orçamento Familiar.
 A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do mês, bem como gerar um relatório mensal.
 
-![image](https://user-images.githubusercontent.com/101612046/184932167-c1ff7262-ea5d-4bfa-9ab6-053fa4c55f73.png)
-
+![image](https://user-images.githubusercontent.com/101612046/185710169-0a9de933-0484-4036-8896-14fd596125c4.png)
+![image](https://user-images.githubusercontent.com/101612046/185710265-cb43dfda-6841-4aa0-bcb7-69d21431b976.png)
 
 </hr>
 
@@ -17,9 +17,15 @@ A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do 
 e de integração
 * <b>Apache POI</b> para geração de XLSX
 * <b>Swagger</b> para documentação dos endpoints
+* <b>JWT</b> com security para autenticação via token
 
-## NOVIDADES
-Pretendo continuar evoluindo o projeto colocando JWT (Security, Roles e Profile).
+* <b>Docker<b/> para build/run e rodar os containers na AWS
+[![Docker Hub Repo](https://img.shields.io/docker/pulls/mulhermarav/familybudgetcontrol.svg)](https://hub.docker.com/repository/docker/mulhermarav/familybudgetcontrol)
+
+## VERSÃO
+ 
+ Java 17 JDK
+
 
 ## ENDPOINT's
 
@@ -145,10 +151,46 @@ Passando `mes and ano` via path, é gerado um XLSX.
 ![image](https://user-images.githubusercontent.com/101612046/184937592-39e0f087-27c6-45ac-8eec-28a85765a261.png)
 
 </br>
+
+- Autenticação via credenciais
+<p></p>
+Passando `email and senha` via body em JSON
+
+```json
+{
+    "email": "dyane.aaraujo@gmail.com",
+    "autenticado": true,
+    "criado": "2022-08-19T21:21:05.062+00:00",
+    "expiracao": "2022-08-19T22:21:05.062+00:00",
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeWFuZS5hYXJhdWpvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU5JU1RSQURPUiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJleHAiOjE2NjA5NDc2NjUsImlhdCI6MTY2MDk0NDA2NX0.e_ZpaHAY91eTFUhb7L9U93R-VWkY4HuebOG85wtCSbU",
+    "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeWFuZS5hYXJhdWpvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU5JU1RSQURPUiJdLCJleHAiOjE2NjA5NTQ4NjUsImlhdCI6MTY2MDk0NDA2NX0.dWoEIqeezDdaYLURoxqTRNgrW6Mph4OaW90UVtWA1w0"
+}
+```
+</br>
+
+- Refresh token
+<p></p>
+Passando `nome` via path e o `token refresh` no header
+
+```json
+{
+    "email": "dyane.aaraujo@gmail.com",
+    "autenticado": true,
+    "criado": "2022-08-19T21:00:49.604+00:00",
+    "expiracao": "2022-08-19T22:00:49.604+00:00",
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeWFuZS5hYXJhdWpvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU5JU1RSQURPUiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJleHAiOjE2NjA5NDY0NDksImlhdCI6MTY2MDk0Mjg0OX0.vNEaViTQS9J0FWeKVbxtL1VQcP0l0dsGXVOG9PvvxL4",
+    "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeWFuZS5hYXJhdWpvQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU5JU1RSQURPUiJdLCJleHAiOjE2NjA5NTM2NDksImlhdCI6MTY2MDk0Mjg0OX0.5EUNNtpFNih2QGaEdgTBpjRvIz7y91aRvwVut466mpk"
+}
+```
+</br>
+
 </hr>
 
 ## SWAGGER
 
-![image](https://user-images.githubusercontent.com/101612046/184960182-791c2ef0-a004-4a07-ad47-ac57be4647a9.png)
-![image](https://user-images.githubusercontent.com/101612046/184960428-8f77c548-3469-4c5f-8c1c-f6f2b2c65437.png)
+![image](https://user-images.githubusercontent.com/101612046/185709535-782a854f-9742-48c0-be71-bf2c0ad7547e.png)
+![image](https://user-images.githubusercontent.com/101612046/185709596-ed2d2e45-f616-41e0-995b-6646d2450913.png)
+![image](https://user-images.githubusercontent.com/101612046/185709682-e13e13a2-1e58-4c81-93da-451e907906ed.png)
+
+
 
