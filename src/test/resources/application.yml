@@ -3,7 +3,7 @@ server:
 cors:
   originPatterns: http://localhost:8080,https://familybudgetcontrol.com.br
 file:
-  upload-dir: /files/upload-dir #diretório para salvar os arquivos
+  upload-dir: /home/runner/work/DESAFIO_ALURA_FamilyBudgetControl/files/upload-dir #diretório para salvar os arquivos
 security:
   jwt:
     token:

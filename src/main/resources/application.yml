@@ -1,5 +1,6 @@
 server:
-  port: 8080
+  port: 80
+  
 cors:
   originPatterns: http://localhost:8080,https://familybudgetcontrol.com.br
 file:
