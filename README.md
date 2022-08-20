@@ -20,7 +20,6 @@ e de integração
 * <b>JWT</b> com security para autenticação via token
 
 * <b>Docker<b/> para buildar/run e subir os containers na AWS
- </br>
 [![Docker Hub Repo](https://img.shields.io/docker/pulls/mulhermarav/familybudgetcontrol.svg)](https://hub.docker.com/repository/docker/mulhermarav/familybudgetcontrol)
 
 ## VERSÃO
