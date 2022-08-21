@@ -13,7 +13,7 @@ A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do 
 * <b>DozerMapper</b> para conversão de VO para Entity
 * <b>MySQL</b> e <b>Flyway</b> para banco de dados
 * <b>Postman</b> para teste dos endpoints
-* <b>JUnit 5</b>, <b>MockMVC<b/> e <b>Testcontainers</b> para testes unitários
+* <b>JUnit 5</b>, <b>MockMVC</b> e <b>Testcontainers</b> para testes unitários
 e de integração
 * <b>Apache POI</b> para geração de XLSX
 * <b>Swagger</b> para documentação dos endpoints
