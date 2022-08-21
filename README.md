@@ -19,7 +19,7 @@ e de integração
 * <b>Swagger</b> para documentação dos endpoints
 * <b>JWT</b> com security para autenticação via token
 
-* <b>Docker<b/> para build/run e rodar os containers na AWS
+* <b>Docker<b/> para build/run em containers
 [![Docker Hub Repo](https://img.shields.io/docker/pulls/mulhermarav/familybudgetcontrol.svg)](https://hub.docker.com/repository/docker/mulhermarav/familybudgetcontrol)
 
 ## VERSÃO
