@@ -55,7 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 				.authorizeRequests()
 				.antMatchers("/budget-control/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/actuator/**")
-				.permitAll().antMatchers(HttpMethod.DELETE, "/budget-control/**").hasRole("ADMINISTRADOR").anyRequest()
+				.permitAll().antMatchers(HttpMethod.GET, "/budget-control/**").permitAll()
+				.antMatchers(HttpMethod.DELETE, "/budget-control/**").hasRole("ADMINISTRADOR").anyRequest()
 				.authenticated()
 
 				.and().cors()
