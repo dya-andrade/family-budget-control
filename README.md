@@ -13,13 +13,13 @@ A aplicação deve permitir que uma pessoa cadastre suas receitas e despesas do 
 * <b>DozerMapper</b> para conversão de VO para Entity
 * <b>MySQL</b> e <b>Flyway</b> para banco de dados
 * <b>Postman</b> para teste dos endpoints
-* <b>JUnit 5</b>, <b>MockMVC<b/> e <b>Testcontainers</b> para testes unitários
+* <b>JUnit 5</b>, <b>MockMVC</b> e <b>Testcontainers</b> para testes unitários
 e de integração
 * <b>Apache POI</b> para geração de XLSX
 * <b>Swagger</b> para documentação dos endpoints
 * <b>JWT</b> com security para autenticação via token
 
-* <b>Docker<b/> para build/run em containers
+* <b>Docker</b> para build/run em containers
 [![Docker Hub Repo](https://img.shields.io/docker/pulls/mulhermarav/familybudgetcontrol.svg)](https://hub.docker.com/repository/docker/mulhermarav/familybudgetcontrol)
 
 ## VERSÃO
