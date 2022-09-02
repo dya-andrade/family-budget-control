@@ -43,13 +43,4 @@ public class ReceitaService extends MovimentacaoService<Receita, ReceitaVO, Rece
 	protected Page<ReceitaVO> parseListPageVO(Page<Receita> vos) {
 		return vos.map(p -> DozerMapper.parseObject(p, ReceitaVO.class));
 	}
-
-	@Override
-	protected Receita setUpdate(Receita entity, ReceitaVO vo) {
-		entity.setDescricao(vo.getDescricao());
-		entity.setData(vo.getData());
-		entity.setValor(vo.getValor());
-
-		return entity;
-	}
 }

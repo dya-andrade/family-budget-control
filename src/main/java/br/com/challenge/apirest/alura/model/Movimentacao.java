@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
+import javax.print.attribute.standard.MediaSize.ISO;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import br.com.challenge.apirest.alura.vo.MovimentacaoVO;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +17,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class Movimentacao implements Serializable {
+public abstract class Movimentacao<E, V extends MovimentacaoVO> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -35,6 +37,8 @@ public abstract class Movimentacao implements Serializable {
 	private LocalDate data;
 	
 	public Movimentacao() {}
+	
+	public abstract E updateVOToEntity(V vo);
 
 	public Long getId() {
 		return id;

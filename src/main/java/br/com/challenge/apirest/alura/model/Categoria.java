@@ -33,29 +33,8 @@ public enum Categoria {
 		return descricao;
 	}
 
-	public static Categoria categoriaPorOrdinal(int posicao) {
-		if (ALIMENTACAO.ordinal() == posicao)
-			return ALIMENTACAO;
-		
-		else if (SAUDE.ordinal() == posicao)
-			return SAUDE;
-		
-		else if (MORADIA.ordinal() == posicao)
-			return MORADIA;
-		
-		else if (TRANSPORTE.ordinal() == posicao)
-			return TRANSPORTE;
-		
-		else if (EDUCACAO.ordinal() == posicao)
-			return EDUCACAO;
-		
-		else if (LAZER.ordinal() == posicao)
-			return LAZER;
-		
-		else if (IMPREVISTOS.ordinal() == posicao)
-			return IMPREVISTOS;
-		
-		else
-			return OUTRAS;
+	public static Categoria categoriaPorPosicao(int posicao) {
+		Categoria[] categorias = Categoria.values();
+		return categorias[posicao];
 	}
 }

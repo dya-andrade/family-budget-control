@@ -44,14 +44,4 @@ public class DespesaService extends MovimentacaoService<Despesa, DespesaVO, Desp
 		return vos.map(p -> DozerMapper.parseObject(p, DespesaVO.class));
 	}
 
-	@Override
-	protected Despesa setUpdate(Despesa entity, DespesaVO vo) {
-		entity.setDescricao(vo.getDescricao());
-		entity.setData(vo.getData());
-		entity.setValor(vo.getValor());
-		entity.setCategoria(vo.getCategoria());
-
-		return entity;
-	}
-
 }

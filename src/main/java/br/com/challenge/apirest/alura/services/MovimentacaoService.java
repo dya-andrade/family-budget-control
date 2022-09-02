@@ -37,8 +37,6 @@ public abstract class MovimentacaoService<E extends Movimentacao, V extends Movi
 	
 	protected abstract Page<V> parseListPageVO(Page<E> entities);
 
-	protected abstract E setUpdate(E entity, V vo);
-
 	public V create(V vo) {
 
 		if (vo == null)
@@ -85,6 +83,7 @@ public abstract class MovimentacaoService<E extends Movimentacao, V extends Movi
 		return vo;
 	}
 
+	@SuppressWarnings("unchecked")
 	public V update(Long id, V vo) {
 
 		if (vo == null)
@@ -95,7 +94,7 @@ public abstract class MovimentacaoService<E extends Movimentacao, V extends Movi
 		E entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Nenhuma entidade encontrada com este ID!"));
 
-		entity = this.setUpdate(entity, vo);
+		entity = (E) entity.updateVOToEntity(vo);
 
 		vo = this.parseVO(repository.save(entity));
 
