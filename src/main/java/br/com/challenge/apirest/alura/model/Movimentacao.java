@@ -33,7 +33,7 @@ public abstract class Movimentacao<E, V extends MovimentacaoVO> implements Seria
 	private Double valor;
 	
 	@Column(nullable = false)
-	@DateTimeFormat(iso = ISO.DATE, pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate data;
 	
 	public Movimentacao() {}
