@@ -3,8 +3,8 @@ package br.com.challenge.apirest.alura.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-import br.com.challenge.apirest.alura.vo.DespesaVO;
-import br.com.challenge.apirest.alura.vo.MovimentacaoVO;
+import br.com.challenge.apirest.alura.data.vo.v1.DespesaVO;
+import br.com.challenge.apirest.alura.data.vo.v1.MovimentacaoVO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

@@ -2,7 +2,7 @@ package br.com.challenge.apirest.alura.model;
 
 import java.io.Serializable;
 
-import br.com.challenge.apirest.alura.vo.ReceitaVO;
+import br.com.challenge.apirest.alura.data.vo.v1.ReceitaVO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 

@@ -20,7 +20,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 import br.com.challenge.apirest.alura.security.jwt.JwtConfigurer;
 import br.com.challenge.apirest.alura.security.jwt.JwtTokenProvider;
-import br.com.challenge.apirest.alura.services.security.AutorizacaoService;
+import br.com.challenge.apirest.alura.service.security.AutorizacaoService;
 
 @SuppressWarnings("deprecation")
 @EnableWebSecurity

@@ -24,7 +24,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.challenge.apirest.alura.model.Despesa;
-import br.com.challenge.apirest.alura.repositories.DespesaRepository;
+import br.com.challenge.apirest.alura.repository.DespesaRepository;
 import br.com.challenge.apirest.alura.testcontainers.AbstractIntegrationTest;
 
 //@RunWith(SpringRunner.class) JUnit 4

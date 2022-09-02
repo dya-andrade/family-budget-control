@@ -8,7 +8,7 @@ import javax.print.attribute.standard.MediaSize.ISO;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import br.com.challenge.apirest.alura.vo.MovimentacaoVO;
+import br.com.challenge.apirest.alura.data.vo.v1.MovimentacaoVO;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

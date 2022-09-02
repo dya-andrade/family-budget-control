@@ -26,9 +26,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import br.com.challenge.apirest.alura.data.vo.v1.ResumoVO;
+import br.com.challenge.apirest.alura.data.vo.v1.security.TokenVO;
 import br.com.challenge.apirest.alura.testcontainers.AbstractIntegrationTest;
-import br.com.challenge.apirest.alura.vo.ResumoVO;
-import br.com.challenge.apirest.alura.vo.security.TokenVO;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT) // port 8888
 @TestMethodOrder(OrderAnnotation.class) 

@@ -25,7 +25,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.challenge.apirest.alura.model.Receita;
-import br.com.challenge.apirest.alura.repositories.ReceitaRepository;
+import br.com.challenge.apirest.alura.repository.ReceitaRepository;
 import br.com.challenge.apirest.alura.testcontainers.AbstractIntegrationTest;
 
 
