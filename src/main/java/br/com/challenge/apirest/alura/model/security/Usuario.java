@@ -41,12 +41,12 @@ public class Usuario implements Serializable, UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuarios_perfis_acesso", joinColumns = {
 	@JoinColumn(name = "id_usuario") }, inverseJoinColumns = { @JoinColumn(name = "id_perfil_acesso") })
-	private List<PerfilAcesso> perfilsAcesso;
+	private List<PerfilAcesso> perfisAcesso;
 
 	public List<String> getRoles() { // quebra de conversão, por conta do UserDetails
 		List<String> roles = new ArrayList<>();
 
-		for (PerfilAcesso perfilAcesso : perfilsAcesso) {
+		for (PerfilAcesso perfilAcesso : perfisAcesso) {
 			roles.add(perfilAcesso.getRole());
 		}
 
@@ -88,17 +88,17 @@ public class Usuario implements Serializable, UserDetails {
 		this.senha = senha;
 	}
 
-	public List<PerfilAcesso> getPerfilsAcesso() {
-		return perfilsAcesso;
+	public List<PerfilAcesso> getPerfisAcesso() {
+		return perfisAcesso;
 	}
 
-	public void setPerfilsAcesso(List<PerfilAcesso> perfilsAcesso) {
-		this.perfilsAcesso = perfilsAcesso;
+	public void setPerfisAcesso(List<PerfilAcesso> perfilsAcesso) {
+		this.perfisAcesso = perfilsAcesso;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, nome, perfilsAcesso, senha);
+		return Objects.hash(email, id, nome, perfisAcesso, senha);
 	}
 
 	@Override
@@ -111,12 +111,12 @@ public class Usuario implements Serializable, UserDetails {
 			return false;
 		Usuario other = (Usuario) obj;
 		return Objects.equals(email, other.email) && Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
-				&& Objects.equals(perfilsAcesso, other.perfilsAcesso) && Objects.equals(senha, other.senha);
+				&& Objects.equals(perfisAcesso, other.perfisAcesso) && Objects.equals(senha, other.senha);
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.perfilsAcesso;
+		return this.perfisAcesso;
 	}
 
 	@Override

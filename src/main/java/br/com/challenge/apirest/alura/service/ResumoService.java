@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.challenge.apirest.alura.configs.FileStorageConfig;
+import br.com.challenge.apirest.alura.config.FileStorageConfig;
 import br.com.challenge.apirest.alura.data.vo.v1.CategoriaVO;
 import br.com.challenge.apirest.alura.data.vo.v1.ResumoVO;
 import br.com.challenge.apirest.alura.exception.FileGenerateException;

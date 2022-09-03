@@ -1,4 +1,4 @@
-package br.com.challenge.apirest.alura.configs;
+package br.com.challenge.apirest.alura.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

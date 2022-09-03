@@ -1,4 +1,4 @@
-package br.com.challenge.apirest.alura.configs;
+package br.com.challenge.apirest.alura.config;
 
 import java.util.HashMap;
 import java.util.Map;
