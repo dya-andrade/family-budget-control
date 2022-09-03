@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.com.challenge.apirest.alura.model.Categoria;
 
-@JsonPropertyOrder({ "categoria", "valorTotal" })
+@JsonPropertyOrder({ "categoria", "total" })
 public class CategoriaVO {
 	
 	private Categoria categoria;

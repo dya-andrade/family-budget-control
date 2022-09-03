@@ -24,6 +24,6 @@ public interface DespesaRepository extends JpaRepository<Despesa, Long> {
 	@Query("SELECT SUM(d.valor) FROM Despesa d WHERE YEAR(d.data) = :ano AND MONTH(d.data) = :mes")
 	Double findTotalAmountByMonth(Integer ano, Integer mes);
 	
-	@Query("SELECT NEW br.com.challenge.apirest.alura.vo.CategoriaVO(d.categoria, SUM(d.valor)) FROM Despesa d WHERE YEAR(d.data) = :ano AND MONTH(d.data) = :mes GROUP BY d.categoria")
+	@Query("SELECT NEW br.com.challenge.apirest.alura.data.vo.v1.CategoriaVO(d.categoria, SUM(d.valor)) FROM Despesa d WHERE YEAR(d.data) = :ano AND MONTH(d.data) = :mes GROUP BY d.categoria")
 	List<CategoriaVO> findTotalAmountByCategoria(Integer ano, Integer mes);
 }
